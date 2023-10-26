@@ -25,6 +25,10 @@
           "*": ["*", "src/*", "public/*"]
       }
   },
-  "include": ["src", "src/main.tsx", "vite-env.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "vite.config.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

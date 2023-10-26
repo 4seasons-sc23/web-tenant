@@ -2,6 +2,8 @@ module.exports = {
     root: true,
     env: { browser: true, es2020: true },
     extends: [
+        'prettier',
+        'plugin:prettier/recommended',
         'eslint:recommended',
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
@@ -23,6 +25,7 @@ module.exports = {
     rules: {
         'import/default': 'off',
         'import/no-named-as-default-member': 'off',
+        'import/no-extraneous-dependencies': 'off',
         'import/order': [
             'error',
             {
@@ -81,15 +84,16 @@ module.exports = {
             },
         ],
         '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
+        '@typescript-eslint/indent': 'off',
+        '@typescript-eslint/comma-dangle': 'off',
         'react/react-in-jsx-scope': 'off',
+        'react/jsx-indent': 'off',
         'no-unused-vars': 'off',
+        'prettier/prettier': 'error',
     },
     settings: {
         'import/resolver': {
             typescript: {},
-            node: {
-                extensions: ['.js', '.jsx', '.ts', '.tsx', 'scss'],
-            },
         },
     },
 };

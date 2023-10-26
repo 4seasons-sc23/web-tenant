@@ -5,13 +5,11 @@ import * as router from './routes';
 
 function App() {
     return (
-        <>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Routes>
-                    <Route path="/" element={<router.Home />} />
-                </Routes>
-            </Suspense>
-        </>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+                <Route path="/" element={<router.Home />} />
+            </Routes>
+        </Suspense>
     );
 }
 
