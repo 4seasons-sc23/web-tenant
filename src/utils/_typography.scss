@@ -1,0 +1,114 @@
+@import './color';
+
+@mixin desktop_title_01 {
+    font-size: 2.875rem; // 46px converted to rem
+    font-weight: bold;
+    line-height: 4.188rem; // 67px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_title_02 {
+    font-size: 1.875rem; // 30px converted to rem
+    font-weight: bold;
+    line-height: 2.688rem; // 43px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_title_03 {
+    font-size: 1.5rem; // 24px converted to rem
+    font-weight: bold;
+    line-height: 2.188rem; // 35px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_body_01 {
+    font-size: 1.25rem; // 20px converted to rem
+    font-weight: bold;
+    line-height: 2.25rem; // 36px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_body_02 {
+    font-size: 1.25rem; // 20px converted to rem
+    line-height: 2.25rem; // 36px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_body_03 {
+    font-size: 0.9375rem; // 15px converted to rem
+    line-height: 1.6875rem; // 27px converted to rem
+    font-weight: 700;
+    color: $black100;
+}
+
+@mixin desktop_body_04 {
+    font-size: 0.9375rem; // 15px converted to rem
+    line-height: 1.6875rem; // 27px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_small_01 {
+    font-size: 0.75rem; // 12px converted to rem
+    font-weight: bold;
+    line-height: 1.0625rem; // 17px converted to rem
+    color: $black100;
+}
+
+@mixin desktop_small_02 {
+    font-size: 0.75rem; // 12px converted to rem
+    line-height: 1.0625rem; // 17px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_title_01 {
+    font-size: 1.5625rem; // 25px converted to rem
+    font-weight: bold;
+    line-height: 2.8125rem; // 45px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_title_02 {
+    font-size: 1.25rem; // 20px converted to rem
+    font-weight: bold;
+    line-height: 2.25rem; // 36px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_title_03 {
+    font-size: 0.9375rem; // 15px converted to rem
+    font-weight: bold;
+    line-height: 1.6875rem; // 27px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_body_00 {
+    font-size: 0.875rem; // 14px converted to rem
+    line-height: 2.125rem; // 170% converted to rem
+    color: $black100;
+}
+
+@mixin mobile_body_01 {
+    font-size: 0.75rem; // 12px converted to rem
+    font-weight: bold;
+    line-height: 1.375rem; // 22px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_body_02 {
+    font-size: 0.75rem; // 12px converted to rem
+    line-height: 1.375rem; // 22px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_body_03 {
+    font-size: 0.625rem; // 10px converted to rem
+    font-weight: bold;
+    line-height: 1.125rem; // 18px converted to rem
+    color: $black100;
+}
+
+@mixin mobile_body_04 {
+    font-size: 0.625rem; // 10px converted to rem
+    line-height: 1.125rem; // 18px converted to rem
+    color: $black100;
+}
