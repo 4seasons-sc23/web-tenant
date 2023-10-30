@@ -1,46 +1,62 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { ILoginForm } from 'types/login';
+
+import request from 'utils/axios';
 
 import styles from './styles.module.scss';
 
-interface ILoginForm {
-    id: string;
-    pw: string;
-}
-
 export default function LoginContainer() {
-    const [loginForm, setLoginForm] = useState<ILoginForm>({ id: '', pw: '' });
+    const navigate = useNavigate();
 
-    const onChangeLoginForm = (id: string, text: string) => {
-        setLoginForm({ ...loginForm, [id]: text });
+    const [loginForm, setLoginForm] = useState<ILoginForm>({ account: '', password: '' });
+
+    const onChangeLoginForm = (key: keyof ILoginForm, value: string) => {
+        setLoginForm((prev) => ({ ...prev, [key]: value }));
+    };
+
+    const onClickFindButton = () => {
+        navigate('/find');
+    };
+
+    const onClickLoginButton = async () => {
+        try {
+            const login = await request('POST', '/v1/sign-in', loginForm);
+            console.log(login);
+        } catch (e) {
+            console.error(e);
+            alert(e.response.message);
+        }
     };
 
     return (
         <div className={styles.container}>
-            <div>
-                <span>ID</span>
+            <h2 className={styles.title}>LOG IN</h2>
+            <div className={styles.inputArea}>
                 <input
-                    id="id"
-                    value={loginForm.id}
-                    placeholder="id를 입력해주세요"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        onChangeLoginForm('id', e.target.value);
-                    }}
+                    value={loginForm.account}
+                    placeholder="ID"
+                    onChange={(e) => onChangeLoginForm('account', e.target.value)}
+                />
+                <input
+                    value={loginForm.password}
+                    placeholder="Password"
+                    onChange={(e) => onChangeLoginForm('password', e.target.value)}
                 />
             </div>
-            <div>
-                <span>PW</span>
-                <input
-                    id="pw"
-                    value={loginForm.pw}
-                    placeholder="비밀번호를 입력해주세요"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        onChangeLoginForm('pw', e.target.value);
-                    }}
-                />
+            <div className={styles.buttonArea}>
+                <button type="button" className={styles.findButton} onClick={onClickFindButton}>
+                    Forgot ID/Password
+                </button>
+                <button
+                    type="button"
+                    className={styles.submitButton}
+                    onClick={() => console.log(loginForm)}
+                >
+                    Log in
+                </button>
             </div>
-            <button type="button" onClick={() => console.log(loginForm)}>
-                login
-            </button>
         </div>
     );
 }

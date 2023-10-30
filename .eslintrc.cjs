@@ -66,7 +66,7 @@ module.exports = {
                         position: 'after',
                     },
                     {
-                        pattern: 'recoil/**',
+                        pattern: 'types/**',
                         group: 'internal',
                         position: 'after',
                     },
@@ -89,6 +89,7 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         'react/jsx-indent': 'off',
         'react/jsx-indent-props': 'off',
+        'object-curly-newline': 'off',
         'no-unused-vars': 'off',
         'prettier/prettier': 'error',
     },
