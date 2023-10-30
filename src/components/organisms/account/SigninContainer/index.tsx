@@ -7,7 +7,7 @@ import request from 'utils/axios';
 
 import styles from './styles.module.scss';
 
-export default function LoginContainer() {
+export default function SigninContainer() {
     const navigate = useNavigate();
 
     const [loginForm, setLoginForm] = useState<ILoginForm>({ account: '', password: '' });

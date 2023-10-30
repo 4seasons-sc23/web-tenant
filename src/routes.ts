@@ -1,4 +1,4 @@
 import { lazy } from 'react';
 
 export const Home = lazy(() => import('./pages/Home'));
-export const Login = lazy(() => import('./pages/Login'));
+export const Account = lazy(() => import('./pages/account'));
