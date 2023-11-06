@@ -1,4 +1,4 @@
-import SigninContainer from 'components/organisms/account/SigninContainer';
+import SigninContainer from 'components/organisms/Account/SigninContainer';
 
 import styles from './styles.module.scss';
 
