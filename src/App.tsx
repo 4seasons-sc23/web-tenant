@@ -12,6 +12,7 @@ function App() {
                 <Route path="/" element={<router.Home />} />
 
                 <Route path="/signin" element={<router.Signin />} />
+                <Route path="/signup" element={<router.Signup />} />
             </Routes>
         </Suspense>
     );
