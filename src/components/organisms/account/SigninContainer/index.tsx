@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ILoginForm } from 'types/login';
+import { ISigninForm } from 'types/account';
 
 import request from 'utils/axios';
 
@@ -10,9 +10,9 @@ import styles from './styles.module.scss';
 export default function SigninContainer() {
     const navigate = useNavigate();
 
-    const [loginForm, setLoginForm] = useState<ILoginForm>({ account: '', password: '' });
+    const [loginForm, setLoginForm] = useState<ISigninForm>({ account: '', password: '' });
 
-    const onChangeLoginForm = (key: keyof ILoginForm, value: string) => {
+    const onChangeLoginForm = (key: keyof ISigninForm, value: string) => {
         setLoginForm((prev) => ({ ...prev, [key]: value }));
     };
 
