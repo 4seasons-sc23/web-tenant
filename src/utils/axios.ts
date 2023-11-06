@@ -1,6 +1,6 @@
 import axios, { Method } from 'axios';
 
-const SERVER_DEPOLY_URL = 'https://engineeo.co.kr/api';
+const SERVER_DEPOLY_URL = 'http://localhost:8080/api';
 
 const request = async (method: Method, url: string, data?: any) => {
     try {

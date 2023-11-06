@@ -11,7 +11,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<router.Home />} />
 
-                <Route path="/sign" element={<router.Account />} />
+                <Route path="/signin" element={<router.Signin />} />
             </Routes>
         </Suspense>
     );
