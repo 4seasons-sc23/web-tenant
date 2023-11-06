@@ -1,0 +1,28 @@
+@import '/src/utils/utils';
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+}
+
+input {
+    margin-top: 20px;
+    border: none;
+    border-bottom: 1px solid $gray50;
+    font-size: 1rem;
+    outline: none;
+
+    &::placeholder {
+        color: $gray100;
+        opacity: 1;
+    }
+
+    &:not(:placeholder-shown) {
+        border-bottom: 1px solid $navy100;
+    }
+}

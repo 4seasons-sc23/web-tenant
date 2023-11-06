@@ -13,6 +13,7 @@ function App() {
 
                 <Route path="/signin" element={<router.Signin />} />
                 <Route path="/signup" element={<router.Signup />} />
+                <Route path="/find" element={<router.Find />} />
             </Routes>
         </Suspense>
     );
