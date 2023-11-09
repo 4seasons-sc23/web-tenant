@@ -25,9 +25,7 @@ export default function FindIdContainer() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
             />
 
-            <button type="button" onClick={onClickFindButton}>
-                Find
-            </button>
+            <button onClick={onClickFindButton}>Find</button>
         </div>
     );
 }

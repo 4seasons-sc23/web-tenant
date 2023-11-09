@@ -46,10 +46,10 @@ export default function SigninContainer() {
                 />
             </div>
             <div className={styles.buttonArea}>
-                <button type="button" className={styles.findButton} onClick={onClickFindButton}>
+                <button className={styles.findButton} onClick={onClickFindButton}>
                     Forgot ID/Password
                 </button>
-                <button type="button" className={styles.submitButton} onClick={onClickLoginButton}>
+                <button className={styles.submitButton} onClick={onClickLoginButton}>
                     Log in
                 </button>
             </div>

@@ -89,6 +89,7 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         'react/jsx-indent': 'off',
         'react/jsx-indent-props': 'off',
+        'react/button-has-type': 'off',
         'object-curly-newline': 'off',
         'no-unused-vars': 'off',
         'prettier/prettier': 'error',

@@ -59,7 +59,7 @@ export default function SignupContainer() {
                 />
             </div>
             <div className={styles.buttonArea}>
-                <button type="button" className={styles.submitButton} onClick={onClickSignupButton}>
+                <button className={styles.submitButton} onClick={onClickSignupButton}>
                     Sign up
                 </button>
             </div>
