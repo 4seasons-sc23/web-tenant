@@ -1,27 +1,19 @@
-# React + TypeScript + Vite
+# InStream Tenant Application Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 개요
 
-Currently, two official plugins are available:
+4학년 2학기 SW캡스톤디자인 "실시간 라이브 스트리밍 SaaS" 프로젝트 중, 기업용 어플리케이션 페이지 프로젝트입니다. 주요 기능은 다음과 같습니다.
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   InStream 기업 서비스 제공
+    -   영상, 채팅 어플리케이션 생성 및 사용
+    -   사용량 내역 조회 및 결제
+    -   InStream 서비스 관련 문의하기
 
-## Expanding the ESLint configuration
+## docker + nginx로 배포하는 과정
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+이후 터미널에서 다음 명령어를 실행합니다.
 
--   Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```shell
+docker build --tag web-tenant .
+docker run -d -p 3001:80 --name web-tenant web-tenant
 ```
-
--   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
--   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
