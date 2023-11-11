@@ -7,6 +7,10 @@ export default function Header() {
 
     const userNickname = '1';
 
+    const onClickLogo = () => {
+        navigate('/');
+    };
+
     const onClickSigninButton = () => {
         navigate('/signin');
     };
@@ -17,7 +21,7 @@ export default function Header() {
 
     return (
         <div className={styles.header}>
-            <div className={styles.header_logo}>
+            <div onClick={onClickLogo} className={styles.header_logo}>
                 <h2>IN-STREAM</h2>
             </div>
             <div>

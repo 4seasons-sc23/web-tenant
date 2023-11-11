@@ -1,1 +1,12 @@
 @import '/src/utils/utils';
+
+.sidebar {
+    // width: 15vw;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 80.5px;
+    left: 0;
+    background-color: $navy100;
+    color: white;
+}

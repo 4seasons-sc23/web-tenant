@@ -20,11 +20,10 @@ export default function SignupContainer() {
 
     const onClickSignupButton = async () => {
         try {
-            const signup = await request('POST', '/v1/sign-up', signupForm);
+            const signup = await request('POST', '/v1/hosts/sign-up', signupForm);
             console.log(signup);
         } catch (e) {
             console.error(e);
-            alert(e.response.message);
         }
     };
 

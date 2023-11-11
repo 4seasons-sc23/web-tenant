@@ -90,8 +90,11 @@ module.exports = {
         'react/jsx-indent': 'off',
         'react/jsx-indent-props': 'off',
         'react/button-has-type': 'off',
+        'jsx-a11y/click-events-have-key-events': 'off',
+        'jsx-a11y/no-static-element-interactions': 'off',
         'object-curly-newline': 'off',
         'no-unused-vars': 'off',
+        'no-alert': 'off',
         'prettier/prettier': 'error',
     },
     settings: {

@@ -26,7 +26,6 @@ export default function SigninContainer() {
             console.log(login);
         } catch (e) {
             console.error(e);
-            alert(e.response.message);
         }
     };
 

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 import styles from './styles.module.scss';
 
@@ -12,6 +13,7 @@ export default function Layout({ children }: Props) {
     return (
         <>
             <Header />
+            <Sidebar />
             <div className={styles.container}>{children}</div>
         </>
     );
