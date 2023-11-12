@@ -23,8 +23,11 @@ export default function SigninContainer() {
 
     const onClickLoginButton = async () => {
         try {
-            const login = await request('POST', '/v1/sign-in', loginForm);
-            console.log(login);
+            const res = await request('POST', '/v1/hosts/sign-in', loginForm);
+            alert('로그인 되었습니다!');
+            localStorage.setItem('id', res.id);
+            localStorage.setItem('name', res.name);
+            navigate('/');
         } catch (e) {
             if (isAxiosError(e) && e.response) alert(e.response.data.message);
             else alert('알 수 없는 에러가 발생했습니다.');
