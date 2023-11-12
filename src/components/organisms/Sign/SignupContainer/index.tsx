@@ -15,11 +15,19 @@ export default function SignupContainer() {
         phoneNumber: '',
     });
 
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [passwordMismatch, setPasswordMismatch] = useState<boolean>(true);
+
     const onChangeLoginForm = (key: keyof ISignupForm, value: string) => {
         setSignupForm((prev) => ({ ...prev, [key]: value }));
     };
 
     const onClickSignupButton = async () => {
+        if (passwordMismatch) {
+            alert('확인 비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
         try {
             const signup = await request('POST', '/v1/hosts/sign-up', signupForm);
             console.log(signup);
@@ -39,15 +47,25 @@ export default function SignupContainer() {
                     onChange={(e) => onChangeLoginForm('account', e.target.value)}
                 />
                 <input
+                    type="password"
                     value={signupForm.password}
                     placeholder="Password"
                     onChange={(e) => onChangeLoginForm('password', e.target.value)}
                 />
-                <input
-                    // value={signupForm.password}
-                    placeholder="Confirm Password"
-                    // onChange={(e) => onChangeLoginForm('password', e.target.value)}
-                />
+                <div className={styles.inputContainer}>
+                    <input
+                        type="password"
+                        value={confirmPassword}
+                        placeholder="Confirm Password"
+                        onChange={(e) => {
+                            setConfirmPassword(e.target.value);
+                            setPasswordMismatch(signupForm.password !== e.target.value);
+                        }}
+                    />
+                    {confirmPassword && passwordMismatch && (
+                        <span className={styles.errMsg}>확인 비밀번호가 일치하지 않습니다.</span>
+                    )}
+                </div>
                 <input
                     value={signupForm.name}
                     placeholder="Name"

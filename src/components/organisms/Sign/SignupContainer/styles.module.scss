@@ -18,6 +18,16 @@
     gap: 5px;
 }
 
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.errMsg {
+    color: red;
+    font-size: 0.7rem;
+}
+
 .buttonArea {
     display: flex;
     justify-content: space-between;
