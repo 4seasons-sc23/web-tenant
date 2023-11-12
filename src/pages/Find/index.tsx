@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import FindIdContainer from 'components/organisms/Account/Find/FindIdContainer';
+import FindIdContainer from 'components/organisms/Sign/Find/FindIdContainer';
 
 import styles from './styles.module.scss';
 
