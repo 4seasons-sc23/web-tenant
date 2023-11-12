@@ -1,7 +1,6 @@
 @import '/src/utils/utils';
 
 .sidebar {
-    // width: 15vw;
     width: 250px;
     height: 100vh;
     position: fixed;
@@ -16,9 +15,13 @@
 }
 
 .menu {
-    list-style: none;
-
-    text-align: left;
     margin: 0;
     padding: 0;
+    text-align: left;
+    list-style: none;
+    cursor: pointer;
+
+    li {
+        padding: 4px 24px;
+    }
 }
