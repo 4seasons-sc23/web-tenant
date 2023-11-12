@@ -41,6 +41,7 @@ export default function SigninContainer() {
                     onChange={(e) => onChangeLoginForm('account', e.target.value)}
                 />
                 <input
+                    type="password"
                     value={loginForm.password}
                     placeholder="Password"
                     onChange={(e) => onChangeLoginForm('password', e.target.value)}
