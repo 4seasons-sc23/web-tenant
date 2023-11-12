@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isAxiosError } from 'axios';
 
 import { ISigninForm } from 'types/account';
 
@@ -25,7 +26,8 @@ export default function SigninContainer() {
             const login = await request('POST', '/v1/sign-in', loginForm);
             console.log(login);
         } catch (e) {
-            console.error(e);
+            if (isAxiosError(e) && e.response) alert(e.response.data.message);
+            else alert('알 수 없는 에러가 발생했습니다.');
         }
     };
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { isAxiosError } from 'axios';
 
 import { ISignupForm } from 'types/account';
 
@@ -23,7 +24,8 @@ export default function SignupContainer() {
             const signup = await request('POST', '/v1/hosts/sign-up', signupForm);
             console.log(signup);
         } catch (e) {
-            console.error(e);
+            if (isAxiosError(e) && e.response) alert(e.response.data.message);
+            else alert('알 수 없는 에러가 발생했습니다.');
         }
     };
 
