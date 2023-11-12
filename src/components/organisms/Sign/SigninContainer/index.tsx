@@ -34,6 +34,12 @@ export default function SigninContainer() {
         }
     };
 
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            onClickLoginButton();
+        }
+    };
+
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>LOG IN</h2>
@@ -41,12 +47,14 @@ export default function SigninContainer() {
                 <input
                     value={loginForm.account}
                     placeholder="ID"
+                    onKeyDown={onKeyDown}
                     onChange={(e) => onChangeLoginForm('account', e.target.value)}
                 />
                 <input
                     type="password"
                     value={loginForm.password}
                     placeholder="Password"
+                    onKeyDown={onKeyDown}
                     onChange={(e) => onChangeLoginForm('password', e.target.value)}
                 />
             </div>
