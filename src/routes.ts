@@ -4,3 +4,4 @@ export const Home = lazy(() => import('./pages/Home'));
 export const Signin = lazy(() => import('./pages/Signin'));
 export const Signup = lazy(() => import('./pages/Signup'));
 export const Find = lazy(() => import('./pages/Find'));
+export const Application = lazy(() => import('./pages/Application'));
