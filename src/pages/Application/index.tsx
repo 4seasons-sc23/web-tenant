@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import ApplicationTable from 'components/organisms/Application/ApplicationList';
+
 import { useAddApplication, useApplications } from 'utils/query/useApplicationQuery';
 
 export default function Application() {
@@ -23,9 +25,7 @@ export default function Application() {
             <button onClick={onClickAddStreamingApplication}>라이브 어플리케이션 추가하기</button>
             <div>
                 {applications ? (
-                    applications.map((application) => (
-                        <div key={application.applicationId}>{application.type}</div>
-                    ))
+                    <ApplicationTable applicationList={applications} />
                 ) : (
                     <div>현재 생성된 어플리케이션이 없습니다. 어플리케이션을 생성해주세요.</div> // 데이터가 로딩 중이거나 없을 때 표시
                 )}

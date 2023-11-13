@@ -7,7 +7,7 @@ import request from 'utils/axios';
 const fetchApplications = async (id: string | null, page: number) => {
     const { data } = await request(
         'GET',
-        `/v1/hosts/${id}/applications?page=${page}&size=10&firstView=true`
+        `/v1/hosts/${id}/applications?page=${page}&size=15&firstView=true`
     );
     return data;
 };
