@@ -86,6 +86,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/comma-dangle': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
         'react/react-in-jsx-scope': 'off',
         'react/jsx-indent': 'off',
         'react/jsx-indent-props': 'off',
@@ -95,6 +96,7 @@ module.exports = {
         'object-curly-newline': 'off',
         'no-unused-vars': 'off',
         'no-alert': 'off',
+        'implicit-arrow-linebreak': 'off',
         'prettier/prettier': 'error',
     },
     settings: {
