@@ -1,27 +1,35 @@
-import { useNavigate } from 'react-router-dom';
-import { isAxiosError } from 'axios';
+import { useState } from 'react';
 
 import { useAddApplication, useApplications } from 'utils/query/useApplicationQuery';
 
 export default function Application() {
-    const navigate = useNavigate();
     const id = localStorage.getItem('id');
+    const [currentPage, setCurrentPage] = useState<number>(0);
 
-    const { data: applications } = useApplications(id);
+    const { data: applications } = useApplications(id, currentPage);
     const addApplicationMutation = useAddApplication();
 
-    const onClickAddApplication = () => {
-        addApplicationMutation.mutate(id);
+    const onClickAddChatApplication = () => {
+        addApplicationMutation.mutate({ id, type: 'CHAT' });
     };
 
-    const onClickGetApplicationList = () => {
-        console.log(applications);
+    const onClickAddStreamingApplication = () => {
+        addApplicationMutation.mutate({ id, type: 'STREAMING' });
     };
 
     return (
         <div>
-            <button onClick={onClickAddApplication}>어플리케이션 추가하기</button>
-            <button onClick={onClickGetApplicationList}>어플리케이션 목록 가져오기</button>
+            <button onClick={onClickAddChatApplication}>채팅 어플리케이션 추가하기</button>
+            <button onClick={onClickAddStreamingApplication}>라이브 어플리케이션 추가하기</button>
+            <div>
+                {applications ? (
+                    applications.map((application) => (
+                        <div key={application.applicationId}>{application.type}</div>
+                    ))
+                ) : (
+                    <div>현재 생성된 어플리케이션이 없습니다. 어플리케이션을 생성해주세요.</div> // 데이터가 로딩 중이거나 없을 때 표시
+                )}
+            </div>
         </div>
     );
 }
