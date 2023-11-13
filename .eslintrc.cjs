@@ -97,6 +97,7 @@ module.exports = {
         'no-unused-vars': 'off',
         'no-alert': 'off',
         'implicit-arrow-linebreak': 'off',
+        'operator-linebreak': 'off',
         'prettier/prettier': 'error',
     },
     settings: {
