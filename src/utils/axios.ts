@@ -1,6 +1,7 @@
 import axios, { Method } from 'axios';
 
-const SERVER_DEPOLY_URL = 'http://10.16.16.41:31371/api';
+const SERVER_DEPOLY_URL =
+    process.env.NODE_ENV === 'production' ? `${window.origin}/api` : 'http://10.16.16.41:31371/api';
 
 const request = async (method: Method, url: string, data?: unknown) => {
     try {
