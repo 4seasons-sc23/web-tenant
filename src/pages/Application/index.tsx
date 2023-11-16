@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import ApplicationTable from 'components/organisms/Application/ApplicationList';
 
-import { useAddApplication, useApplications } from 'utils/query/useApplicationQuery';
+import { usePostApplication, useApplications } from 'utils/query/useApplicationQuery';
 
 import styles from './styles.module.scss';
 
@@ -10,7 +10,7 @@ export default function Application() {
     const [currentPage, setCurrentPage] = useState<number>(0);
 
     const { data: applications } = useApplications(currentPage);
-    const addApplicationMutation = useAddApplication();
+    const addApplicationMutation = usePostApplication();
 
     const onClickAddChatApplication = () => {
         addApplicationMutation.mutate({ type: 'CHAT' });

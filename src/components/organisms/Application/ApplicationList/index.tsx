@@ -1,8 +1,5 @@
-import { isAxiosError } from 'axios';
-
 import { IApplication } from 'types/application';
 
-import request from 'utils/axios';
 import { dateForm } from 'utils/dateForm';
 import { useDeleteApplication, usePatchApplication } from 'utils/query/useApplicationQuery';
 
@@ -24,6 +21,7 @@ export default function ApplicationTable({ applicationList }: Props) {
                     <th>applicationId</th>
                     <th>createAt</th>
                     <th>status</th>
+                    <th>session</th>
                     <th>type</th>
                     <th>delete</th>
                 </tr>
@@ -45,6 +43,7 @@ export default function ApplicationTable({ applicationList }: Props) {
                         >
                             <button>{app.status === 'N' ? '활성화' : '비활성화'}</button>
                         </td>
+                        <td>{JSON.stringify(app.session)}</td>
                         <td>{app.type}</td>
                         <td>
                             <button
