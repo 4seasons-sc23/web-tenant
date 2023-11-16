@@ -88,6 +88,7 @@ module.exports = {
         '@typescript-eslint/comma-dangle': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         'react/react-in-jsx-scope': 'off',
+        'react/jsx-curly-newline': 'off',
         'react/jsx-indent': 'off',
         'react/jsx-indent-props': 'off',
         'react/button-has-type': 'off',

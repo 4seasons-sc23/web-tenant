@@ -4,26 +4,31 @@ import ApplicationTable from 'components/organisms/Application/ApplicationList';
 
 import { useAddApplication, useApplications } from 'utils/query/useApplicationQuery';
 
+import styles from './styles.module.scss';
+
 export default function Application() {
-    const id = localStorage.getItem('id');
     const [currentPage, setCurrentPage] = useState<number>(0);
 
-    const { data: applications } = useApplications(id, currentPage);
+    const { data: applications } = useApplications(currentPage);
     const addApplicationMutation = useAddApplication();
 
     const onClickAddChatApplication = () => {
-        addApplicationMutation.mutate({ id, type: 'CHAT' });
+        addApplicationMutation.mutate({ type: 'CHAT' });
     };
 
     const onClickAddStreamingApplication = () => {
-        addApplicationMutation.mutate({ id, type: 'STREAMING' });
+        addApplicationMutation.mutate({ type: 'STREAMING' });
     };
 
     return (
         <div>
-            <button onClick={onClickAddChatApplication}>채팅 어플리케이션 추가하기</button>
-            <button onClick={onClickAddStreamingApplication}>라이브 어플리케이션 추가하기</button>
-            <div>
+            <div className={styles.buttonArea}>
+                <button onClick={onClickAddChatApplication}>채팅 어플리케이션 추가하기</button>
+                <button onClick={onClickAddStreamingApplication}>
+                    라이브 어플리케이션 추가하기
+                </button>
+            </div>
+            <div className={styles.applicationList}>
                 {applications ? (
                     <ApplicationTable applicationList={applications} />
                 ) : (
