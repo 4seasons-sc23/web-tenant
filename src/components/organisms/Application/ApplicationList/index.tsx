@@ -3,6 +3,7 @@ import { isAxiosError } from 'axios';
 import { IApplication } from 'types/application';
 
 import request from 'utils/axios';
+import { dateForm } from 'utils/dateForm';
 import { useDeleteApplication } from 'utils/query/useApplicationQuery';
 
 import styles from './styles.module.scss';
@@ -29,9 +30,9 @@ export default function ApplicationTable({ applicationList }: Props) {
             <tbody>
                 {applicationList.map((app) => (
                     <tr key={app.applicationId}>
-                        <td>{app.apiKey || 'N/A'}</td>
+                        <td>{app.apiKey}</td>
                         <td>{app.applicationId}</td>
-                        <td>{new Date(app.createdAt).toLocaleString()}</td>
+                        <td>{dateForm(app.createdAt)}</td>
                         <td>{app.status}</td>
                         <td>{app.type}</td>
                         <td>
@@ -39,7 +40,7 @@ export default function ApplicationTable({ applicationList }: Props) {
                                 onClick={() =>
                                     deleteApp({ appId: app.applicationId, apiKey: app.apiKey })
                                 }
-                                disabled={isLoading}
+                                disabled={isLoading || app.status === 'F'}
                             >
                                 삭제
                             </button>
