@@ -5,17 +5,17 @@ import { loginCheck } from 'utils/loginCheck';
 
 const id = window.localStorage.getItem('id');
 
-export const getApplications = async (page: number) => {
+export const getApplications = async (page: number, firstView: boolean) => {
     if (!loginCheck()) {
         alert('로그인 먼저 해주세요');
         window.location.href = '/signin';
     }
 
-    const { data } = await request(
+    const res = await request(
         'GET',
-        `/v1/hosts/${id}/applications?page=${page}&size=15&firstView=true`
+        `/v1/hosts/${id}/applications?page=${page}&size=15&firstView=${firstView}`
     );
-    return data;
+    return res;
 };
 
 export const postApplications = async (type: 'CHAT' | 'STREAMING') => {

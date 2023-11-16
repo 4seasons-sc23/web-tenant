@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ApplicationTable from 'components/organisms/Application/ApplicationTable';
+import PaginationComponent from 'components/organisms/Common/Pagination';
 
 import { usePostApplication, useApplications } from 'utils/query/useApplicationQuery';
 
@@ -8,9 +9,20 @@ import styles from './styles.module.scss';
 
 export default function Application() {
     const [currentPage, setCurrentPage] = useState<number>(0);
+    const [pageCount, setPageCount] = useState<number>(0);
+    const [totalElementCount, setTotalElementCount] = useState<number>(0);
+    const [firstView, setFirstView] = useState<boolean>(true);
 
-    const { data: applications } = useApplications(currentPage);
+    const { data: applications } = useApplications(currentPage, firstView);
     const addApplicationMutation = usePostApplication();
+
+    useEffect(() => {
+        if (applications && firstView) {
+            setPageCount(applications.pageCount);
+            setTotalElementCount(applications.totalElementCount);
+            setFirstView(false);
+        }
+    }, [applications, firstView]);
 
     const onClickAddChatApplication = () => {
         addApplicationMutation.mutate({ type: 'CHAT' });
@@ -30,7 +42,14 @@ export default function Application() {
             </div>
             <div className={styles.applicationList}>
                 {applications ? (
-                    <ApplicationTable applicationList={applications} />
+                    <>
+                        <ApplicationTable applicationList={applications.data} />
+                        <PaginationComponent
+                            currentPage={currentPage}
+                            setPage={setCurrentPage}
+                            pageCount={pageCount}
+                        />
+                    </>
                 ) : (
                     <div>현재 생성된 어플리케이션이 없습니다. 어플리케이션을 생성해주세요.</div> // 데이터가 로딩 중이거나 없을 때 표시
                 )}

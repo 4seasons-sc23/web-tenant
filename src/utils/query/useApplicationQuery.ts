@@ -4,10 +4,18 @@ import { IApplication } from 'types/application';
 
 import * as appApi from 'utils/api/applicationApi';
 
-const id = window.localStorage.getItem('id');
+interface ApplicationData {
+    currentPage: number;
+    data: IApplication[];
+    length: number;
+    pageCount: number;
+    totalElementCount: number;
+}
 
-export const useApplications = (page: number) =>
-    useQuery<IApplication[]>(['applications', id], () => appApi.getApplications(page));
+export const useApplications = (page: number, firstView: boolean) =>
+    useQuery<ApplicationData>(['applications', page], () =>
+        appApi.getApplications(page, firstView)
+    );
 
 export const usePostApplication = () => {
     const queryClient = useQueryClient();
