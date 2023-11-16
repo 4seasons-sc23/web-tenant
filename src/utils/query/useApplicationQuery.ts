@@ -41,8 +41,8 @@ export const useAddApplication = () => {
     );
 };
 
-const deleteApplication = async (appId: string, apiKey: string) => {
-    const headers = { ApiKey: apiKey };
+const deleteApplication = async (appId: string, ApiKey: string) => {
+    const headers = { ApiKey };
     await request('DELETE', `/v1/hosts/${id}/applications/${appId}`, null, headers);
 };
 
@@ -51,6 +51,27 @@ export const useDeleteApplication = () => {
 
     return useMutation(
         ({ appId, apiKey }: { appId: string; apiKey: string }) => deleteApplication(appId, apiKey),
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries('applications');
+            },
+        }
+    );
+};
+
+const patchApplication = async (appId: string, ApiKey: string, status: 'N' | 'P' | 'F') => {
+    const headers = { ApiKey };
+    const type = status === 'N' ? 'end' : 'start';
+
+    await request('PATCH', `/v1/hosts/${id}/applications/${appId}/${type}`, null, headers);
+};
+
+export const usePatchApplication = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation(
+        ({ appId, apiKey, status }: { appId: string; apiKey: string; status: 'N' | 'P' | 'F' }) =>
+            patchApplication(appId, apiKey, status),
         {
             onSuccess: () => {
                 queryClient.invalidateQueries('applications');

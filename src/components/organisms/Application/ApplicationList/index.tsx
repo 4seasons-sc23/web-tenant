@@ -4,7 +4,7 @@ import { IApplication } from 'types/application';
 
 import request from 'utils/axios';
 import { dateForm } from 'utils/dateForm';
-import { useDeleteApplication } from 'utils/query/useApplicationQuery';
+import { useDeleteApplication, usePatchApplication } from 'utils/query/useApplicationQuery';
 
 import styles from './styles.module.scss';
 
@@ -14,6 +14,7 @@ interface Props {
 
 export default function ApplicationTable({ applicationList }: Props) {
     const { mutate: deleteApp, isLoading } = useDeleteApplication();
+    const { mutate: patchApp } = usePatchApplication();
 
     return (
         <table className={styles.table}>
@@ -33,7 +34,17 @@ export default function ApplicationTable({ applicationList }: Props) {
                         <td>{app.apiKey}</td>
                         <td>{app.applicationId}</td>
                         <td>{dateForm(app.createdAt)}</td>
-                        <td>{app.status}</td>
+                        <td
+                            onClick={() =>
+                                patchApp({
+                                    appId: app.applicationId,
+                                    apiKey: app.apiKey,
+                                    status: app.status,
+                                })
+                            }
+                        >
+                            <button>{app.status === 'N' ? '활성화' : '비활성화'}</button>
+                        </td>
                         <td>{app.type}</td>
                         <td>
                             <button
