@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 import { IApplication } from 'types/application';
@@ -24,8 +25,13 @@ export const useApplications = (page: number) =>
     useQuery<IApplication[]>(['applications', id], () => fetchApplications(page));
 
 const addApplication = async (type: 'CHAT' | 'STREAMING') => {
-    const { data } = await request('POST', `/v1/hosts/${id}/applications`, { type });
-    return data;
+    try {
+        const { data } = await request('POST', `/v1/hosts/${id}/applications`, { type });
+        return data;
+    } catch (e) {
+        if (isAxiosError(e)) alert(e.response?.data.message);
+        return null;
+    }
 };
 
 export const useAddApplication = () => {
@@ -43,7 +49,12 @@ export const useAddApplication = () => {
 
 const deleteApplication = async (appId: string, ApiKey: string) => {
     const headers = { ApiKey };
-    await request('DELETE', `/v1/hosts/${id}/applications/${appId}`, null, headers);
+
+    try {
+        await request('DELETE', `/v1/hosts/${id}/applications/${appId}`, null, headers);
+    } catch (e) {
+        if (isAxiosError(e)) alert(e.response?.data.message);
+    }
 };
 
 export const useDeleteApplication = () => {
@@ -63,7 +74,11 @@ const patchApplication = async (appId: string, ApiKey: string, status: 'N' | 'P'
     const headers = { ApiKey };
     const type = status === 'N' ? 'end' : 'start';
 
-    await request('PATCH', `/v1/hosts/${id}/applications/${appId}/${type}`, null, headers);
+    try {
+        await request('PATCH', `/v1/hosts/${id}/applications/${appId}/${type}`, null, headers);
+    } catch (e) {
+        if (isAxiosError(e)) alert(e.response?.data.message);
+    }
 };
 
 export const usePatchApplication = () => {
