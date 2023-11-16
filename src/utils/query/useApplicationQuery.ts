@@ -3,8 +3,14 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { IApplication } from 'types/application';
 
 import request from 'utils/axios';
+import { loginCheck } from 'utils/loginCheck';
 
 const fetchApplications = async (id: string | null, page: number) => {
+    if (!loginCheck()) {
+        alert('로그인 먼저 해주세요');
+        window.location.href = '/signin';
+    }
+
     const { data } = await request(
         'GET',
         `/v1/hosts/${id}/applications?page=${page}&size=15&firstView=true`
