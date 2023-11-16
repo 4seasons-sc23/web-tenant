@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ApplicationTable from 'components/organisms/Application/ApplicationList';
+import ApplicationTable from 'components/organisms/Application/ApplicationTable';
 
 import { usePostApplication, useApplications } from 'utils/query/useApplicationQuery';
 
