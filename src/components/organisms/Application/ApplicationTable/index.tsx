@@ -7,9 +7,17 @@ import styles from './styles.module.scss';
 
 interface Props {
     applicationList: IApplication[];
+    currentPage: number;
+    setCurrentPage: (page: number) => void;
+    setFirstView: (view: boolean) => void;
 }
 
-export default function ApplicationTable({ applicationList }: Props) {
+export default function ApplicationTable({
+    applicationList,
+    currentPage,
+    setCurrentPage,
+    setFirstView,
+}: Props) {
     const { mutate: deleteApp, isLoading } = useDeleteApplication();
     const { mutate: patchApp } = usePatchApplication();
 
@@ -47,9 +55,13 @@ export default function ApplicationTable({ applicationList }: Props) {
                         <td>{app.type}</td>
                         <td>
                             <button
-                                onClick={() =>
-                                    deleteApp({ appId: app.applicationId, apiKey: app.apiKey })
-                                }
+                                onClick={() => {
+                                    deleteApp({ appId: app.applicationId, apiKey: app.apiKey });
+                                    setFirstView(true);
+                                    if (currentPage > 0 && applicationList.length === 1) {
+                                        setCurrentPage(currentPage - 1);
+                                    }
+                                }}
                                 disabled={isLoading || app.status === 'F'}
                             >
                                 삭제

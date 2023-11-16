@@ -26,10 +26,12 @@ export default function Application() {
 
     const onClickAddChatApplication = () => {
         addApplicationMutation.mutate({ type: 'CHAT' });
+        setFirstView(true);
     };
 
     const onClickAddStreamingApplication = () => {
         addApplicationMutation.mutate({ type: 'STREAMING' });
+        setFirstView(true);
     };
 
     return (
@@ -42,14 +44,19 @@ export default function Application() {
             </div>
             <div className={styles.applicationList}>
                 {applications ? (
-                    <>
-                        <ApplicationTable applicationList={applications.data} />
+                    <div className={styles.table}>
+                        <ApplicationTable
+                            applicationList={applications.data}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            setFirstView={setFirstView}
+                        />
                         <PaginationComponent
                             currentPage={currentPage}
                             setPage={setCurrentPage}
                             pageCount={pageCount}
                         />
-                    </>
+                    </div>
                 ) : (
                     <div>현재 생성된 어플리케이션이 없습니다. 어플리케이션을 생성해주세요.</div> // 데이터가 로딩 중이거나 없을 때 표시
                 )}
