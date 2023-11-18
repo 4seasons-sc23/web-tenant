@@ -1,6 +1,7 @@
 import { IApplication } from 'types/application';
 
 import { dateForm } from 'utils/dateForm';
+import { sessionStatus } from 'utils/sessionStatus';
 import { useDeleteApplication, usePatchApplication } from 'utils/query/useApplicationQuery';
 
 import styles from './styles.module.scss';
@@ -49,9 +50,9 @@ export default function ApplicationTable({
                                 })
                             }
                         >
-                            <button>{app.status === 'N' ? '활성화' : '비활성화'}</button>
+                            <button>{app.status !== 'N' ? '활성화' : '비활성화'}</button>
                         </td>
-                        <td>{JSON.stringify(app.session)}</td>
+                        <td>{sessionStatus(app.session)}</td>
                         <td>{app.type}</td>
                         <td>
                             <button

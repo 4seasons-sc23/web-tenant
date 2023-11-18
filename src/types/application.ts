@@ -1,3 +1,9 @@
+export interface ISession {
+    id: string;
+    createdAt: string;
+    deletedAt: string | null;
+}
+
 /**
 - N - 활성화
 - P - 비활성화
@@ -10,5 +16,5 @@ export interface IApplication {
     apiKey: string;
     status: 'N' | 'P' | 'F';
     createdAt: string;
-    session: string | null;
+    session: ISession | null;
 }
