@@ -40,6 +40,7 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                     <tr key={app.applicationId}>
                         <td>{app.apiKey}</td>
                         <td
+                            style={{ cursor: 'pointer' }}
                             onClick={() => {
                                 navigate({
                                     pathname: '/session',

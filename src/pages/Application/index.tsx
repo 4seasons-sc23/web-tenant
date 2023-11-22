@@ -31,12 +31,16 @@ export default function Application() {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <div className={styles.buttonArea}>
                 <button onClick={onClickAddStreamingApplication}>
-                    라이브 어플리케이션 추가하기
+                    <span>Add Live Application</span>
+                    <span>+</span>
                 </button>
-                <button onClick={onClickAddChatApplication}>채팅 어플리케이션 추가하기</button>
+                <button onClick={onClickAddChatApplication}>
+                    <span>Add Chat Application</span>
+                    <span>+</span>
+                </button>
             </div>
             <div className={styles.applicationList}>
                 {applications ? (

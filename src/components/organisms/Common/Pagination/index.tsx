@@ -19,7 +19,6 @@ function PaginationComponent({ currentPage, setPage, pageCount }: PaginationProp
 
     return (
         <div className={styles.container}>
-            {/* 이전 페이지 버튼 */}
             <button
                 className={`${styles.button} ${
                     currentPage === 0 ? styles.disabled : styles.active
@@ -31,14 +30,12 @@ function PaginationComponent({ currentPage, setPage, pageCount }: PaginationProp
                 <GrPrevious />
             </button>
 
-            {/* 현재 페이지 표시 */}
             <div>
                 <span>{currentPage + 1}</span>
                 <span> / </span>
                 <span>{pageCount}</span>
             </div>
 
-            {/* 다음 페이지 버튼 */}
             <button
                 className={`${styles.button} ${
                     currentPage === pageCount - 1 ? styles.disabled : styles.active

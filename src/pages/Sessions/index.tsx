@@ -2,6 +2,8 @@ import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import PaginationComponent from 'components/organisms/Common/Pagination';
+
 import request from 'utils/axios';
 import { dateForm } from 'utils/dateForm';
 
@@ -21,6 +23,9 @@ export default function Sessions() {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
 
+    const [currentPage, setCurrentPage] = useState<number>(0);
+    const [pageCount, setPageCount] = useState<number>(0);
+
     const apiKey = params.get('apiKey');
     const applicationId = params.get('applicationId');
 
@@ -31,11 +36,11 @@ export default function Sessions() {
             try {
                 const res = await request(
                     'GET',
-                    `/v1/hosts/${id}/applications/${applicationId}/sessions?page=0&size=15&firstView=true`,
+                    `/v1/hosts/${id}/applications/${applicationId}/sessions?page=${currentPage}&size=15&firstView=true`,
                     null,
                     { ApiKey: apiKey }
                 );
-
+                setPageCount(res.pageCount);
                 setSessionsList(res.data);
             } catch (e) {
                 if (isAxiosError(e)) alert(e.response?.data.message);
@@ -43,37 +48,48 @@ export default function Sessions() {
         };
 
         getSessionsList();
-    }, []);
+    }, [currentPage]);
 
     return (
         <div className={styles.container}>
-            <table>
-                <thead>
-                    <tr>
-                        <th>sessionId</th>
-                        <th>createdAt</th>
-                        <th>deletedAt</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sessionsList.map((session) => (
-                        <tr>
-                            <td
-                                onClick={() => {
-                                    navigate(
-                                        `/participant?apiKey=${apiKey}&sessionId=${session.id}`
-                                    );
-                                }}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                {session.id}
-                            </td>
-                            <td>{dateForm(session.createdAt)}</td>
-                            <td>{dateForm(session.deletedAt)}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {sessionsList.length !== 0 ? (
+                <>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>sessionId</th>
+                                <th>createdAt</th>
+                                <th>deletedAt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sessionsList.map((session) => (
+                                <tr>
+                                    <td
+                                        onClick={() => {
+                                            navigate(
+                                                `/participant?apiKey=${apiKey}&sessionId=${session.id}`
+                                            );
+                                        }}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        {session.id}
+                                    </td>
+                                    <td>{dateForm(session.createdAt)}</td>
+                                    <td>{dateForm(session.deletedAt)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <PaginationComponent
+                        currentPage={currentPage}
+                        setPage={setCurrentPage}
+                        pageCount={pageCount}
+                    />
+                </>
+            ) : (
+                <div>생성된 세션이 없습니다.</div>
+            )}
         </div>
     );
 }
