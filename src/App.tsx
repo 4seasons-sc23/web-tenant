@@ -20,6 +20,7 @@ function App() {
                     <Route path="/info" element={<router.Info />} />
 
                     <Route path="/application" element={<router.Application />} />
+                    <Route path="/session" element={<router.Session />} />
                 </Routes>
             </Layout>
         </Suspense>

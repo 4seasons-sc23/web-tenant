@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/prefer-default-export
-export const dateForm = (date: string) => {
+export const dateForm = (date: string | null) => {
+    if (!date) return 'N/A';
     const newDate = new Date(date);
 
     const year = newDate.getFullYear();

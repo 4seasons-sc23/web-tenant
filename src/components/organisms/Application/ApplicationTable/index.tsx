@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { IApplication } from 'types/application';
 
 import { dateForm } from 'utils/dateForm';
@@ -19,6 +21,8 @@ export default function ApplicationTable({
     setCurrentPage,
     setFirstView,
 }: Props) {
+    const navigate = useNavigate();
+
     const { mutate: deleteApp, isLoading } = useDeleteApplication();
     const { mutate: patchApp } = usePatchApplication();
 
@@ -39,7 +43,16 @@ export default function ApplicationTable({
                 {applicationList.map((app) => (
                     <tr key={app.applicationId}>
                         <td>{app.apiKey}</td>
-                        <td>{app.applicationId}</td>
+                        <td
+                            onClick={() => {
+                                navigate({
+                                    pathname: '/session',
+                                    search: `?apiKey=${app.apiKey}&applicationId=${app.applicationId}`,
+                                });
+                            }}
+                        >
+                            {app.applicationId}
+                        </td>
                         <td>{dateForm(app.createdAt)}</td>
                         <td
                             onClick={() =>
