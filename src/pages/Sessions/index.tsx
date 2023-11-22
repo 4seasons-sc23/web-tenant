@@ -1,6 +1,6 @@
 import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import request from 'utils/axios';
 import { dateForm } from 'utils/dateForm';
@@ -14,6 +14,8 @@ interface ISession {
 }
 
 export default function Sessions() {
+    const navigate = useNavigate();
+
     const id = window.localStorage.getItem('id');
 
     const location = useLocation();
@@ -56,7 +58,15 @@ export default function Sessions() {
                 <tbody>
                     {sessionsList.map((session) => (
                         <tr>
-                            <td>{session.id}</td>
+                            <td
+                                onClick={() => {
+                                    navigate(
+                                        `/participant?apiKey=${apiKey}&sessionId=${session.id}`
+                                    );
+                                }}
+                            >
+                                {session.id}
+                            </td>
                             <td>{dateForm(session.createdAt)}</td>
                             <td>{dateForm(session.deletedAt)}</td>
                         </tr>
