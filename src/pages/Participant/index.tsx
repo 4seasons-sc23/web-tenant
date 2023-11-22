@@ -1,6 +1,7 @@
 import { isAxiosError } from 'axios';
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import request from 'utils/axios';
 
 export default function Participant() {
