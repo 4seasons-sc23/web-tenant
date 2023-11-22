@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useNavigate } from 'react-router-dom';
+import { FiTrash2 } from 'react-icons/fi';
 
 import { IApplication } from 'types/application';
 
@@ -28,7 +30,7 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                     <th>applicationId</th>
                     <th>createAt</th>
                     <th>status</th>
-                    <th>session</th>
+                    {/* <th>session</th> */}
                     <th>type</th>
                     <th>delete</th>
                 </tr>
@@ -57,22 +59,30 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                                 })
                             }
                         >
-                            <button>{app.status !== 'N' ? '활성화' : '비활성화'}</button>
+                            <button className={`${app.status === 'N' ? styles.on : styles.off}`}>
+                                {app.status === 'N' ? 'ON' : 'OFF'}
+                            </button>
                         </td>
-                        <td>{sessionStatus(app.session)}</td>
+                        {/* <td>{sessionStatus(app.session)}</td> */}
                         <td>{app.type}</td>
                         <td>
-                            <button
+                            <FiTrash2
+                                style={{ cursor: 'pointer' }}
+                                color="#3e3582"
                                 onClick={() => {
-                                    deleteApp({ appId: app.applicationId, apiKey: app.apiKey });
-                                    if (currentPage > 0 && applicationList.length === 1) {
-                                        setCurrentPage(currentPage - 1);
+                                    if (!(isLoading || app.status === 'F')) {
+                                        if (window.confirm('레알루다가 삭제할꺼얌 ?? >__<')) {
+                                            deleteApp({
+                                                appId: app.applicationId,
+                                                apiKey: app.apiKey,
+                                            });
+                                            if (currentPage > 0 && applicationList.length === 1) {
+                                                setCurrentPage(currentPage - 1);
+                                            }
+                                        }
                                     }
                                 }}
-                                disabled={isLoading || app.status === 'F'}
-                            >
-                                삭제
-                            </button>
+                            />
                         </td>
                     </tr>
                 ))}

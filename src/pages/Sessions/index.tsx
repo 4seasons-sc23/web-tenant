@@ -64,6 +64,7 @@ export default function Sessions() {
                                         `/participant?apiKey=${apiKey}&sessionId=${session.id}`
                                     );
                                 }}
+                                style={{ cursor: 'pointer' }}
                             >
                                 {session.id}
                             </td>

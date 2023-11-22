@@ -28,13 +28,15 @@ input {
 }
 
 th {
-    background-color: #f1f1f1;
+    background-color: #3e3582;
+    color: white !important;
 }
 
 table,
 td,
 th {
-    border: 1px solid black;
+    border: 1px solid #3e3582;
     border-collapse: collapse;
-    padding: 5px 10px;
+    padding: 5px 0;
+    color: #333d4b;
 }

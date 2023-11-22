@@ -1,5 +1,7 @@
-// PaginationComponent.tsx
 import React from 'react';
+import { GrPrevious, GrNext } from 'react-icons/gr';
+
+import styles from './styles.module.scss';
 
 interface PaginationProps {
     currentPage: number;
@@ -16,23 +18,36 @@ function PaginationComponent({ currentPage, setPage, pageCount }: PaginationProp
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             {/* 이전 페이지 버튼 */}
-            <button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 0}>
-                이전
+            <button
+                className={`${styles.button} ${
+                    currentPage === 0 ? styles.disabled : styles.active
+                }`}
+                onClick={() => changePage(currentPage - 1)}
+                disabled={currentPage === 0}
+            >
+                prev
+                <GrPrevious />
             </button>
 
             {/* 현재 페이지 표시 */}
-            <span>{currentPage + 1}</span>
-            <span> / </span>
-            <span>{pageCount}</span>
+            <div>
+                <span>{currentPage + 1}</span>
+                <span> / </span>
+                <span>{pageCount}</span>
+            </div>
 
             {/* 다음 페이지 버튼 */}
             <button
+                className={`${styles.button} ${
+                    currentPage === pageCount - 1 ? styles.disabled : styles.active
+                }`}
                 onClick={() => changePage(currentPage + 1)}
                 disabled={currentPage === pageCount - 1}
             >
-                다음
+                <GrNext />
+                next
             </button>
         </div>
     );

@@ -4,3 +4,35 @@
     text-align: center;
     width: 100%;
 }
+
+// .on {
+//     border: none;
+//     background-color: green;
+//     color: white;
+//     cursor: pointer;
+//     width: 70%;
+// }
+
+// .off {
+//     border: none;
+//     background-color: red;
+//     color: white;
+//     cursor: pointer;
+//     width: 70%;
+// }
+
+.on {
+    border: none;
+    background-color: #3e3582;
+    color: white;
+    cursor: pointer;
+    width: 70%;
+}
+
+.off {
+    border: 0.7px solid #3e3582;
+    background-color: white;
+    color: #3e3582;
+    cursor: pointer;
+    width: 70%;
+}
