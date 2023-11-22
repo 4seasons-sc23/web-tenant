@@ -10,7 +10,6 @@ import styles from './styles.module.scss';
 export default function Application() {
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [pageCount, setPageCount] = useState<number>(0);
-    const [totalElementCount, setTotalElementCount] = useState<number>(0);
 
     const { data: applications } = useApplications(currentPage);
     const addApplicationMutation = usePostApplication();
@@ -18,7 +17,6 @@ export default function Application() {
     useEffect(() => {
         if (applications) {
             setPageCount(applications.pageCount);
-            setTotalElementCount(applications.totalElementCount);
         }
     }, [applications]);
 
