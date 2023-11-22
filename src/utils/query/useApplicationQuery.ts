@@ -12,10 +12,8 @@ interface ApplicationData {
     totalElementCount: number;
 }
 
-export const useApplications = (page: number, firstView: boolean) =>
-    useQuery<ApplicationData>(['applications', page], () =>
-        appApi.getApplications(page, firstView)
-    );
+export const useApplications = (page: number) =>
+    useQuery<ApplicationData>(['applications', page], () => appApi.getApplications(page));
 
 export const usePostApplication = () => {
     const queryClient = useQueryClient();

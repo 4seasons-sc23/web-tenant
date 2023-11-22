@@ -11,36 +11,32 @@ export default function Application() {
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [pageCount, setPageCount] = useState<number>(0);
     const [totalElementCount, setTotalElementCount] = useState<number>(0);
-    const [firstView, setFirstView] = useState<boolean>(true);
 
-    const { data: applications } = useApplications(currentPage, firstView);
+    const { data: applications } = useApplications(currentPage);
     const addApplicationMutation = usePostApplication();
 
     useEffect(() => {
-        if (applications && firstView) {
+        if (applications) {
             setPageCount(applications.pageCount);
             setTotalElementCount(applications.totalElementCount);
-            setFirstView(false);
         }
-    }, [applications, firstView]);
+    }, [applications]);
 
     const onClickAddChatApplication = () => {
         addApplicationMutation.mutate({ type: 'CHAT' });
-        setFirstView(true);
     };
 
     const onClickAddStreamingApplication = () => {
         addApplicationMutation.mutate({ type: 'STREAMING' });
-        setFirstView(true);
     };
 
     return (
         <div>
             <div className={styles.buttonArea}>
-                <button onClick={onClickAddChatApplication}>채팅 어플리케이션 추가하기</button>
                 <button onClick={onClickAddStreamingApplication}>
                     라이브 어플리케이션 추가하기
                 </button>
+                <button onClick={onClickAddChatApplication}>채팅 어플리케이션 추가하기</button>
             </div>
             <div className={styles.applicationList}>
                 {applications ? (
@@ -49,7 +45,6 @@ export default function Application() {
                             applicationList={applications.data}
                             currentPage={currentPage}
                             setCurrentPage={setCurrentPage}
-                            setFirstView={setFirstView}
                         />
                         <PaginationComponent
                             currentPage={currentPage}

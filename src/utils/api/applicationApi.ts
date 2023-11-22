@@ -5,7 +5,7 @@ import { loginCheck } from 'utils/loginCheck';
 
 const id = window.localStorage.getItem('id');
 
-export const getApplications = async (page: number, firstView: boolean) => {
+export const getApplications = async (page: number) => {
     if (!loginCheck()) {
         alert('로그인 먼저 해주세요');
         window.location.href = '/signin';
@@ -13,7 +13,7 @@ export const getApplications = async (page: number, firstView: boolean) => {
 
     const res = await request(
         'GET',
-        `/v1/hosts/${id}/applications?page=${page}&size=15&firstView=${firstView}`
+        `/v1/hosts/${id}/applications?page=${page}&size=15&firstView=true`
     );
     return res;
 };

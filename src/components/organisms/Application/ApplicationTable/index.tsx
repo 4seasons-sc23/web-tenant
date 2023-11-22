@@ -12,15 +12,9 @@ interface Props {
     applicationList: IApplication[];
     currentPage: number;
     setCurrentPage: (page: number) => void;
-    setFirstView: (view: boolean) => void;
 }
 
-export default function ApplicationTable({
-    applicationList,
-    currentPage,
-    setCurrentPage,
-    setFirstView,
-}: Props) {
+export default function ApplicationTable({ applicationList, currentPage, setCurrentPage }: Props) {
     const navigate = useNavigate();
 
     const { mutate: deleteApp, isLoading } = useDeleteApplication();
@@ -71,7 +65,6 @@ export default function ApplicationTable({
                             <button
                                 onClick={() => {
                                     deleteApp({ appId: app.applicationId, apiKey: app.apiKey });
-                                    setFirstView(true);
                                     if (currentPage > 0 && applicationList.length === 1) {
                                         setCurrentPage(currentPage - 1);
                                     }
