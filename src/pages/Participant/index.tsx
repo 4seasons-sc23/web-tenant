@@ -66,17 +66,23 @@ export default function Participant() {
                     <table>
                         <thead>
                             <tr>
-                                <th>status</th>
+                                {/* <th>status</th> */}
                                 <th>nickname</th>
-                                <th>createdAt</th>
+                                <th>enter</th>
+                                <th>leave</th>
                             </tr>
                         </thead>
                         <tbody>
                             {participantList.map((participant) => (
                                 <tr>
-                                    <td>{participant.updatedAt ? 'leave' : 'enter'}</td>
+                                    {/* <td>{participant.updatedAt ? 'leave' : 'enter'}</td> */}
                                     <td>{participant.participant.nickname}</td>
                                     <td>{dateForm(participant.createdAt)}</td>
+                                    <td>
+                                        {participant.updatedAt
+                                            ? dateForm(participant.updatedAt)
+                                            : 'N/A'}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
