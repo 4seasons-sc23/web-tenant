@@ -7,7 +7,7 @@ export const dateForm = (date: string | null) => {
     const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
     const day = newDate.getDate().toString().padStart(2, '0');
 
-    const hour = newDate.getHours().toString().padStart(2, '0');
+    const hour = (newDate.getHours() + 9).toString().padStart(2, '0');
     const minute = newDate.getMinutes().toString().padStart(2, '0');
 
     return `${year}.${month}.${day} ${hour}:${minute}`;
