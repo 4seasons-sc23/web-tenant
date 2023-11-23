@@ -1,6 +1,8 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useNavigate } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
+import { FaRegCopy } from 'react-icons/fa';
 
 import { IApplication } from 'types/application';
 
@@ -27,7 +29,9 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
             <thead>
                 <tr>
                     <th>apiKey</th>
+                    <th></th>
                     <th>applicationId</th>
+                    <th></th>
                     <th>createAt</th>
                     <th>status</th>
                     {/* <th>session</th> */}
@@ -39,6 +43,15 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                 {applicationList.map((app) => (
                     <tr key={app.applicationId}>
                         <td>{app.apiKey}</td>
+                        <td style={{ width: '3%' }}>
+                            <FaRegCopy
+                                style={{ cursor: 'pointer' }}
+                                onClick={async () => {
+                                    await navigator.clipboard.writeText(app.apiKey);
+                                    alert('클립보드에 복사되었습니다!');
+                                }}
+                            />
+                        </td>
                         <td
                             style={{ cursor: 'pointer' }}
                             onClick={() => {
@@ -49,6 +62,15 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                             }}
                         >
                             {app.applicationId}
+                        </td>
+                        <td style={{ width: '3%' }}>
+                            <FaRegCopy
+                                style={{ cursor: 'pointer' }}
+                                onClick={async () => {
+                                    await navigator.clipboard.writeText(app.applicationId);
+                                    alert('클립보드에 복사되었습니다!');
+                                }}
+                            />
                         </td>
                         <td>{dateForm(app.createdAt)}</td>
                         <td

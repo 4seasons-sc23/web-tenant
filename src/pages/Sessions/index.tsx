@@ -1,6 +1,9 @@
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaRegCopy } from 'react-icons/fa';
 
 import PaginationComponent from 'components/organisms/Common/Pagination';
 
@@ -58,6 +61,7 @@ export default function Sessions() {
                         <thead>
                             <tr>
                                 <th>sessionId</th>
+                                <th></th>
                                 <th>createdAt</th>
                                 <th>deletedAt</th>
                             </tr>
@@ -74,6 +78,15 @@ export default function Sessions() {
                                         style={{ cursor: 'pointer' }}
                                     >
                                         {session.id}
+                                    </td>
+                                    <td style={{ width: '3%' }}>
+                                        <FaRegCopy
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={async () => {
+                                                await navigator.clipboard.writeText(session.id);
+                                                alert('클립보드에 복사되었습니다!');
+                                            }}
+                                        />
                                     </td>
                                     <td>{dateForm(session.createdAt)}</td>
                                     <td>{dateForm(session.deletedAt)}</td>
