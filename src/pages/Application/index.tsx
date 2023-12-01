@@ -59,8 +59,7 @@ export default function Application() {
                     <div className={styles.table}>
                         <ApplicationTable
                             applicationList={applications}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
+                            getApplicationList={getApplicationList}
                         />
                         <PaginationComponent
                             currentPage={currentPage}

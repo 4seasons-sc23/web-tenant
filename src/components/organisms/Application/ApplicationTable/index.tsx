@@ -3,33 +3,66 @@
 import { useNavigate } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
 import { FaRegCopy } from 'react-icons/fa';
+import { isAxiosError } from 'axios';
 
 import { IApplication } from 'types/application';
 
+import request from 'utils/axios';
 import { dateForm } from 'utils/dateForm';
 
 import styles from './styles.module.scss';
 
 interface Props {
     applicationList: IApplication[];
-    currentPage: number;
-    setCurrentPage: (page: number) => void;
+    getApplicationList: (isFirstView: boolean) => Promise<void>;
 }
 
-export default function ApplicationTable({ applicationList, currentPage, setCurrentPage }: Props) {
+export default function ApplicationTable({
+    applicationList,
+
+    getApplicationList,
+}: Props) {
     const navigate = useNavigate();
+
+    const onClickDeleteApplication = (applicationId: string, ApiKey: string) => async () => {
+        const headers = { ApiKey };
+        try {
+            await request('DELETE', `/v1/applications/${applicationId}`, null, headers);
+
+            getApplicationList(true);
+        } catch (e) {
+            if (isAxiosError(e)) alert(e.response?.data.message);
+        }
+    };
+
+    const onClickStatusButton =
+        (status: 'N' | 'P' | 'F', applicationId: string, ApiKey: string) => async () => {
+            const headers = { ApiKey };
+
+            try {
+                await request(
+                    'PATCH',
+                    `/v1/applications/${applicationId}/${status === 'N' ? 'end' : 'start'}`,
+                    undefined,
+                    headers
+                );
+
+                getApplicationList(false);
+            } catch (e) {
+                if (isAxiosError(e)) alert(e.response?.data.message);
+            }
+        };
 
     return (
         <table className={styles.table}>
             <thead>
                 <tr>
                     <th>apiKey</th>
-                    <th></th>
+                    <th />
                     <th>applicationId</th>
-                    <th></th>
+                    <th />
                     <th>createAt</th>
                     <th>status</th>
-                    {/* <th>session</th> */}
                     <th>type</th>
                     <th>delete</th>
                 </tr>
@@ -69,17 +102,19 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                         </td>
                         <td>{dateForm(app.createdAt)}</td>
                         <td>
-                            <button className={`${app.status === 'N' ? styles.on : styles.off}`}>
+                            <button
+                                onClick={onClickStatusButton(app.status, app.id, app.apiKey)}
+                                className={`${app.status === 'N' ? styles.on : styles.off}`}
+                            >
                                 {app.status === 'N' ? 'ON' : 'OFF'}
                             </button>
                         </td>
-                        {/* <td>{sessionStatus(app.session)}</td> */}
                         <td>{app.type}</td>
                         <td>
                             <FiTrash2
                                 style={{ cursor: 'pointer' }}
                                 color="#3e3582"
-                                onClick={() => {}}
+                                onClick={onClickDeleteApplication(app.id, app.apiKey)}
                             />
                         </td>
                     </tr>
