@@ -7,8 +7,6 @@ import { FaRegCopy } from 'react-icons/fa';
 import { IApplication } from 'types/application';
 
 import { dateForm } from 'utils/dateForm';
-import { sessionStatus } from 'utils/sessionStatus';
-import { useDeleteApplication, usePatchApplication } from 'utils/query/useApplicationQuery';
 
 import styles from './styles.module.scss';
 
@@ -20,9 +18,6 @@ interface Props {
 
 export default function ApplicationTable({ applicationList, currentPage, setCurrentPage }: Props) {
     const navigate = useNavigate();
-
-    const { mutate: deleteApp, isLoading } = useDeleteApplication();
-    const { mutate: patchApp } = usePatchApplication();
 
     return (
         <table className={styles.table}>
@@ -41,7 +36,7 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
             </thead>
             <tbody>
                 {applicationList.map((app) => (
-                    <tr key={app.applicationId}>
+                    <tr key={app.id}>
                         <td>{app.apiKey}</td>
                         <td style={{ width: '3%' }}>
                             <FaRegCopy
@@ -57,31 +52,23 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                             onClick={() => {
                                 navigate({
                                     pathname: '/session',
-                                    search: `?apiKey=${app.apiKey}&applicationId=${app.applicationId}`,
+                                    search: `?apiKey=${app.apiKey}&id=${app.id}`,
                                 });
                             }}
                         >
-                            {app.applicationId}
+                            {app.id}
                         </td>
                         <td style={{ width: '3%' }}>
                             <FaRegCopy
                                 style={{ cursor: 'pointer' }}
                                 onClick={async () => {
-                                    await navigator.clipboard.writeText(app.applicationId);
+                                    await navigator.clipboard.writeText(app.id);
                                     alert('클립보드에 복사되었습니다!');
                                 }}
                             />
                         </td>
                         <td>{dateForm(app.createdAt)}</td>
-                        <td
-                            onClick={() =>
-                                patchApp({
-                                    appId: app.applicationId,
-                                    apiKey: app.apiKey,
-                                    status: app.status,
-                                })
-                            }
-                        >
+                        <td>
                             <button className={`${app.status === 'N' ? styles.on : styles.off}`}>
                                 {app.status === 'N' ? 'ON' : 'OFF'}
                             </button>
@@ -92,19 +79,7 @@ export default function ApplicationTable({ applicationList, currentPage, setCurr
                             <FiTrash2
                                 style={{ cursor: 'pointer' }}
                                 color="#3e3582"
-                                onClick={() => {
-                                    if (!(isLoading || app.status === 'F')) {
-                                        if (window.confirm('레알루다가 삭제할꺼얌 ?? >__<')) {
-                                            deleteApp({
-                                                appId: app.applicationId,
-                                                apiKey: app.apiKey,
-                                            });
-                                            if (currentPage > 0 && applicationList.length === 1) {
-                                                setCurrentPage(currentPage - 1);
-                                            }
-                                        }
-                                    }
-                                }}
+                                onClick={() => {}}
                             />
                         </td>
                     </tr>

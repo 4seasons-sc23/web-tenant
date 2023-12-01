@@ -11,7 +11,7 @@ export interface ISession {
 */
 
 export interface IApplication {
-    applicationId: string;
+    id: string;
     type: 'CHAT' | 'STREAMING';
     apiKey: string;
     status: 'N' | 'P' | 'F';

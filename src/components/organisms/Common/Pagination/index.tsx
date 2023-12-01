@@ -7,9 +7,10 @@ interface PaginationProps {
     currentPage: number;
     setPage: (page: number) => void;
     pageCount: number;
+    setFirstView: (firstView: boolean) => void;
 }
 
-function PaginationComponent({ currentPage, setPage, pageCount }: PaginationProps) {
+function PaginationComponent({ currentPage, setPage, pageCount, setFirstView }: PaginationProps) {
     // 페이지 변경 핸들러
     const changePage = (newPage: number) => {
         if (newPage >= 0 && newPage < pageCount) {
@@ -23,7 +24,10 @@ function PaginationComponent({ currentPage, setPage, pageCount }: PaginationProp
                 className={`${styles.button} ${
                     currentPage === 0 ? styles.disabled : styles.active
                 }`}
-                onClick={() => changePage(currentPage - 1)}
+                onClick={() => {
+                    changePage(currentPage - 1);
+                    setFirstView(false);
+                }}
                 disabled={currentPage === 0}
             >
                 prev
@@ -40,7 +44,10 @@ function PaginationComponent({ currentPage, setPage, pageCount }: PaginationProp
                 className={`${styles.button} ${
                     currentPage === pageCount - 1 ? styles.disabled : styles.active
                 }`}
-                onClick={() => changePage(currentPage + 1)}
+                onClick={() => {
+                    changePage(currentPage + 1);
+                    setFirstView(false);
+                }}
                 disabled={currentPage === pageCount - 1}
             >
                 <GrNext />
