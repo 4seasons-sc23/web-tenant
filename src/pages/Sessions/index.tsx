@@ -18,39 +18,41 @@ interface ISession {
     deletedAt: string;
 }
 
+const id = window.localStorage.getItem('id');
+
 export default function Sessions() {
     const navigate = useNavigate();
-
-    const id = window.localStorage.getItem('id');
 
     const location = useLocation();
     const params = new URLSearchParams(location.search);
 
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [pageCount, setPageCount] = useState<number>(0);
+    const [firstView, setFirstView] = useState<boolean>(true);
 
-    const apiKey = params.get('apiKey');
+    const ApiKey = params.get('ApiKey');
     const applicationId = params.get('applicationId');
 
     const [sessionsList, setSessionsList] = useState<ISession[]>([]);
 
-    useEffect(() => {
-        const getSessionsList = async () => {
-            try {
-                const res = await request(
-                    'GET',
-                    `/v1/hosts/${id}/applications/${applicationId}/sessions?page=${currentPage}&size=15&firstView=true`,
-                    null,
-                    { ApiKey: apiKey }
-                );
-                setPageCount(res.pageCount);
-                setSessionsList(res.data);
-            } catch (e) {
-                if (isAxiosError(e)) alert(e.response?.data.message);
-            }
-        };
+    const getSessionsList = async (isFirstView: boolean) => {
+        try {
+            const res = await request(
+                'GET',
+                `/v1/applications/${applicationId}/sessions?page=${currentPage}&size=15&firstView=${isFirstView}`,
+                null,
+                { ApiKey }
+            );
+            setSessionsList(res.data);
 
-        getSessionsList();
+            if (res.pageCount) setPageCount(res.pageCount);
+        } catch (e) {
+            if (isAxiosError(e)) alert(e.response?.data.message);
+        }
+    };
+
+    useEffect(() => {
+        getSessionsList(firstView);
     }, [currentPage]);
 
     return (
@@ -72,7 +74,7 @@ export default function Sessions() {
                                     <td
                                         onClick={() => {
                                             navigate(
-                                                `/participant?apiKey=${apiKey}&sessionId=${session.id}`
+                                                `/participant?ApiKey=${ApiKey}&sessionId=${session.id}`
                                             );
                                         }}
                                         style={{ cursor: 'pointer' }}
@@ -98,6 +100,7 @@ export default function Sessions() {
                         currentPage={currentPage}
                         setPage={setCurrentPage}
                         pageCount={pageCount}
+                        setFirstView={setFirstView}
                     />
                 </>
             ) : (
