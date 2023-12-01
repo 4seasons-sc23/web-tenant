@@ -1,5 +1,23 @@
 @import '/src/utils/utils';
 
+.buttonArea {
+    display: flex;
+    gap: 40px;
+    margin: 120px 0 30px 5%;
+
+    button {
+        display: flex;
+        gap: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: $navy100;
+        color: white;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -7,8 +25,8 @@
     align-items: center;
     gap: 20px;
     height: 100%;
-
     text-align: center;
+
     table {
         width: 100%;
     }
