@@ -1,9 +1,10 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { isAxiosError } from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaRegCopy } from 'react-icons/fa';
+import { FiTrash2 } from 'react-icons/fi';
 
 import PaginationComponent from 'components/organisms/Common/Pagination';
 
@@ -64,6 +65,16 @@ export default function Sessions() {
         }
     };
 
+    const onClickDeleteSession = async () => {
+        try {
+            await request('PATCH', `/v1/applcations/${applicationId}/sessions/end`, null, {
+                ApiKey,
+            });
+        } catch (e) {
+            if (isAxiosError(e)) alert(e.response?.data.message);
+        }
+    };
+
     return (
         <>
             <div className={styles.buttonArea}>
@@ -82,6 +93,7 @@ export default function Sessions() {
                                     <th></th>
                                     <th>createdAt</th>
                                     <th>deletedAt</th>
+                                    <th>delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,6 +120,16 @@ export default function Sessions() {
                                         </td>
                                         <td>{dateForm(session.createdAt)}</td>
                                         <td>{dateForm(session.deletedAt)}</td>
+                                        <td>
+                                            <FiTrash2
+                                                style={{ cursor: 'pointer' }}
+                                                color="#3e3582"
+                                                // onClick={onClickDeleteApplication(
+                                                //     app.id,
+                                                //     app.apiKey
+                                                // )}
+                                            />
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
