@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 
 import request from 'utils/axios';
@@ -8,12 +9,20 @@ import styles from './styles.module.scss';
 const id = window.localStorage.getItem('id');
 
 export default function PostQuestion() {
+    const navigate = useNavigate();
+
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('');
 
     const postError = async () => {
+        if (!(title && content)) {
+            alert('내용을 작성해주세요');
+            return;
+        }
         try {
             await request('POST', '/v1/errors', { tenantId: id, title, content });
+            alert('등록되었습니다.');
+            navigate(-1);
         } catch (e) {
             if (isAxiosError(e)) alert(e.response?.data.message);
         }
