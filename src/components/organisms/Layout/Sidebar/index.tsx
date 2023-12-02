@@ -32,6 +32,18 @@ export default function Sidebar() {
                         </div>
                     </li>
                 </ul>
+                <ul className={styles.menu}>
+                    <li className="menu-item">
+                        <div
+                            className="menu-title"
+                            onClick={() => {
+                                navigate('/billing');
+                            }}
+                        >
+                            <span>Billing</span>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     );
