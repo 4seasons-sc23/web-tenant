@@ -13,3 +13,5 @@ export const QuestionContent = lazy(() => import('./pages/Question/Content'));
 export const Application = lazy(() => import('./pages/Application'));
 export const Session = lazy(() => import('./pages/Sessions'));
 export const Participant = lazy(() => import('./pages/Participant'));
+
+export const Billing = lazy(() => import('./pages/Billing'));

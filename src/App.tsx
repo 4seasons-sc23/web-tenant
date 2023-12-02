@@ -25,6 +25,8 @@ function App() {
                     <Route path="/application" element={<router.Application />} />
                     <Route path="/session" element={<router.Session />} />
                     <Route path="/participant" element={<router.Participant />} />
+
+                    <Route path="/billing" element={<router.Billing />} />
                 </Routes>
             </Layout>
         </Suspense>
