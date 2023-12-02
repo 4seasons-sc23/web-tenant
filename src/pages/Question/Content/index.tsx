@@ -58,11 +58,25 @@ export default function QuestionContent() {
         getErrorData();
     }, []);
 
+    const deleteQuestion = async () => {
+        if (!window.confirm('삭제하시겠습니까?')) return;
+        try {
+            await request('PATCH', `/v1/errors/${id}/delete`);
+            alert('삭제되었습니다.');
+            navigate(-1);
+        } catch (e) {
+            if (isAxiosError(e)) alert(e.response?.data.message);
+        }
+    };
+
     return (
         <div className={styles.container}>
-            <button onClick={() => navigate(`/question/post/${questionData.errorId}`)}>
-                modify question
-            </button>
+            <div className={styles.buttonArea}>
+                <button onClick={() => navigate(`/question/post/${questionData.errorId}`)}>
+                    modify question
+                </button>
+                <button onClick={deleteQuestion}>delete question</button>
+            </div>
             <div>question</div>
             <div className={styles.question}>
                 <div>{`title: ${questionData?.title}`}</div>
