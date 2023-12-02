@@ -74,7 +74,7 @@ export default function Question() {
                                     {error.title}
                                 </td>
                                 <td style={{ width: '10%' }}>
-                                    {error.isAnswered === 'Y' ? '완료' : '답변진행중'}
+                                    {error.isAnswered === 'Y' ? '답변완료' : '답변대기중'}
                                 </td>
                                 <td style={{ width: '15%' }}>{dateForm(error.createdAt)}</td>
                             </tr>
