@@ -18,6 +18,9 @@ function App() {
                     <Route path="/signup" element={<router.Signup />} />
                     <Route path="/find" element={<router.Find />} />
                     <Route path="/info" element={<router.Info />} />
+                    <Route path="/question" element={<router.Question />} />
+                    <Route path="/question/post/:id" element={<router.PostQuestion />} />
+                    <Route path="/question/:id" element={<router.QuestionContent />} />
 
                     <Route path="/application" element={<router.Application />} />
                     <Route path="/session" element={<router.Session />} />

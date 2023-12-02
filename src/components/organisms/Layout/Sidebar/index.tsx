@@ -20,6 +20,18 @@ export default function Sidebar() {
                         </div>
                     </li>
                 </ul>
+                <ul className={styles.menu}>
+                    <li className="menu-item">
+                        <div
+                            className="menu-title"
+                            onClick={() => {
+                                navigate('/question');
+                            }}
+                        >
+                            <span>Question</span>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     );
