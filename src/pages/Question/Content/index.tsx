@@ -73,12 +73,6 @@ export default function QuestionContent() {
         <div className={styles.container}>
             <div className={styles.buttonArea}>
                 <div className={styles.area_title}>문의내역</div>
-                <div className={styles.buttonBox}>
-                    <button onClick={() => navigate(`/question/post/${questionData.errorId}`)}>
-                        modify
-                    </button>
-                    <button onClick={deleteQuestion}>delete</button>
-                </div>
             </div>
 
             <div className={styles.question}>
@@ -90,6 +84,12 @@ export default function QuestionContent() {
                 <div className={styles.contentContainer}>
                     <span className={styles.bold}>content</span>
                     <span className={styles.contentBox}>{questionData?.content}</span>
+                    <div className={styles.buttonBox}>
+                        <button onClick={() => navigate(`/question/post/${questionData.errorId}`)}>
+                            modify
+                        </button>
+                        <button onClick={deleteQuestion}>delete</button>
+                    </div>
                 </div>
             </div>
             {questionData.isAnswered === 'Y' && (
