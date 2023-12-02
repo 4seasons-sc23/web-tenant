@@ -27,26 +27,25 @@ interface IParticipant {
 }
 
 export default function Participant() {
-    const id = window.localStorage.getItem('id');
-
     const location = useLocation();
     const params = new URLSearchParams(location.search);
 
-    const apiKey = params.get('apiKey');
+    const ApiKey = params.get('ApiKey');
     const sessionId = params.get('sessionId');
 
     const [participantList, setParticipantList] = useState<IParticipant[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [pageCount, setPageCount] = useState<number>(0);
+    const [firstView, setFirstView] = useState<boolean>(true);
 
     useEffect(() => {
         const getParticipantList = async () => {
             try {
                 const res = await request(
                     'GET',
-                    `/v1/hosts/${id}/applications/sessions/${sessionId}/participants?page=0&size=15&firstView=true`,
+                    `/v1/applications/sessions/${sessionId}/participants?page=${currentPage}&size=15&firstView=${firstView}`,
                     null,
-                    { ApiKey: apiKey }
+                    { ApiKey }
                 );
 
                 setParticipantList(res.data);
@@ -66,7 +65,6 @@ export default function Participant() {
                     <table>
                         <thead>
                             <tr>
-                                {/* <th>status</th> */}
                                 <th>nickname</th>
                                 <th>enter</th>
                                 <th>leave</th>
@@ -75,7 +73,6 @@ export default function Participant() {
                         <tbody>
                             {participantList.map((participant) => (
                                 <tr>
-                                    {/* <td>{participant.updatedAt ? 'leave' : 'enter'}</td> */}
                                     <td>{participant.participant.nickname}</td>
                                     <td>{dateForm(participant.createdAt)}</td>
                                     <td>
@@ -91,6 +88,7 @@ export default function Participant() {
                         currentPage={currentPage}
                         setPage={setCurrentPage}
                         pageCount={pageCount}
+                        setFirstView={setFirstView}
                     />
                 </>
             ) : (
