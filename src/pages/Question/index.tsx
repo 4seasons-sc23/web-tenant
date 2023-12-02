@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 
 import PaginationComponent from 'components/organisms/Common/Pagination';
@@ -10,6 +11,8 @@ import styles from './styles.module.scss';
 const id = window.localStorage.getItem('id');
 
 export default function Question() {
+    const navigate = useNavigate();
+
     const [errorList, setErrorList] = useState<unknown[]>([]);
 
     const [currentPage, setCurrentPage] = useState<number>(0);
@@ -20,7 +23,7 @@ export default function Question() {
         try {
             const res = await request(
                 'GET',
-                `/v1/hosts/${id}/errors?page=${currentPage}&size=15&firstView=${isFirstView}&sort[name]=createdAt&sort[option]=ASC`
+                `/v1/hosts/${id}/errors?page=${currentPage}&size=15&firstView=${isFirstView}`
             );
 
             setErrorList(res.data);
@@ -36,7 +39,7 @@ export default function Question() {
     return (
         <>
             <div className={styles.buttonArea}>
-                <button>Add Question +</button>
+                <button onClick={() => navigate('/question/post')}>Add Question +</button>
             </div>
             <div className={styles.container}>
                 <PaginationComponent
