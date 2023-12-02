@@ -51,7 +51,7 @@ export default function Question() {
     return (
         <>
             <div className={styles.buttonArea}>
-                <button onClick={() => navigate('/question/post')}>Add Question +</button>
+                <button onClick={() => navigate('/question/post/0')}>Add Question +</button>
             </div>
             <div className={styles.container}>
                 <table>
@@ -67,7 +67,12 @@ export default function Question() {
                         {errorList.map((error) => (
                             <tr>
                                 <td style={{ width: '5%' }}>{error.errorId}</td>
-                                <td>{error.title}</td>
+                                <td
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => navigate(`/question/${error.errorId}`)}
+                                >
+                                    {error.title}
+                                </td>
                                 <td style={{ width: '10%' }}>
                                     {error.isAnswered === 'Y' ? '완료' : '답변진행중'}
                                 </td>
