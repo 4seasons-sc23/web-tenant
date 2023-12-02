@@ -72,23 +72,36 @@ export default function QuestionContent() {
     return (
         <div className={styles.container}>
             <div className={styles.buttonArea}>
-                <button onClick={() => navigate(`/question/post/${questionData.errorId}`)}>
-                    modify question
-                </button>
-                <button onClick={deleteQuestion}>delete question</button>
+                <div className={styles.area_title}>문의내역</div>
             </div>
-            <div>question</div>
+
             <div className={styles.question}>
-                <div>{`title: ${questionData?.title}`}</div>
-                <div>{`content: ${questionData?.content}`}</div>
+                <div className={styles.text}>
+                    <span className={styles.bold}>title</span>
+                    <span>{questionData?.title}</span>
+                </div>
+                <div className={styles.divider} />
+                <div className={styles.contentContainer}>
+                    <span className={styles.bold}>content</span>
+                    <span className={styles.contentBox}>{questionData?.content}</span>
+                    <div className={styles.buttonBox}>
+                        <button onClick={() => navigate(`/question/post/${questionData.errorId}`)}>
+                            modify
+                        </button>
+                        <button onClick={deleteQuestion}>delete</button>
+                    </div>
+                </div>
             </div>
             {questionData.isAnswered === 'Y' && (
-                <>
-                    <div>answer</div>
+                <div className={styles.contentContainer}>
+                    <div>.</div>
+                    <div>.</div>
+                    <div>.</div>
+                    <div className={styles.bold}>answer</div>
                     <div className={styles.answer}>
-                        <div>{`content: ${answerData?.content}`}</div>
+                        <div>{answerData?.content}</div>
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

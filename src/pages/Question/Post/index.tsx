@@ -61,17 +61,23 @@ export default function PostQuestion() {
 
     return (
         <div className={styles.postBox}>
-            <input
-                placeholder="문의 제목"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
+            <div className={styles.inputBox}>
+                <div>title</div>
+                <input
+                    placeholder="문의 제목"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+            </div>
 
-            <textarea
-                placeholder="문의 내용"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-            />
+            <div>
+                <div className={styles.bold}>content</div>
+                <textarea
+                    placeholder="문의 내용"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                />
+            </div>
             <button onClick={id === '0' ? postError : patchError}>
                 {id === '0' ? '등록하기' : '수정하기'}
             </button>
