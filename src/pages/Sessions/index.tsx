@@ -31,6 +31,7 @@ export default function Sessions() {
 
     const ApiKey = params.get('ApiKey');
     const applicationId = params.get('applicationId');
+    const type = params.get('type');
 
     const [sessionsList, setSessionsList] = useState<ISession[]>([]);
 
@@ -67,9 +68,10 @@ export default function Sessions() {
 
     const onClickDeleteSession = async () => {
         try {
-            await request('PATCH', `/v1/applcations/${applicationId}/sessions/end`, null, {
+            await request('PATCH', `/v1/applications/${applicationId}/sessions/end`, null, {
                 ApiKey,
             });
+            getSessionsList(true);
         } catch (e) {
             if (isAxiosError(e)) alert(e.response?.data.message);
         }
@@ -78,7 +80,7 @@ export default function Sessions() {
     return (
         <>
             <div className={styles.buttonArea}>
-                <button onClick={onClickAddSession}>
+                <button onClick={onClickAddSession} disabled={type === 'STREAMING'}>
                     <span>Add Session</span>
                     <span>+</span>
                 </button>
@@ -124,10 +126,7 @@ export default function Sessions() {
                                             <FiTrash2
                                                 style={{ cursor: 'pointer' }}
                                                 color="#3e3582"
-                                                // onClick={onClickDeleteApplication(
-                                                //     app.id,
-                                                //     app.apiKey
-                                                // )}
+                                                onClick={onClickDeleteSession}
                                             />
                                         </td>
                                     </tr>

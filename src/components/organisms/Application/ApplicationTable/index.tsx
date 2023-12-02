@@ -85,7 +85,7 @@ export default function ApplicationTable({
                             onClick={() => {
                                 navigate({
                                     pathname: '/session',
-                                    search: `?ApiKey=${app.apiKey}&applicationId=${app.id}`,
+                                    search: `?ApiKey=${app.apiKey}&applicationId=${app.id}&type=${app.type}`,
                                 });
                             }}
                         >
