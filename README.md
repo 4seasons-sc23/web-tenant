@@ -1,5 +1,5 @@
 <div align=center>
-	<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Chat%20Sync%20Server&fontSize=80&fontAlignY=36" />	
+	<img src="https://capsule-render.vercel.app/api?type=waving&color=#3e3582&height=200&section=header&text=Tenant%20Page&fontSize=80&fontAlignY=36" />	
 </div>
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
