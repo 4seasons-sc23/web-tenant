@@ -12,7 +12,7 @@ const hostId = window.localStorage.getItem('id');
 
 interface IBilling {
     id: string;
-    type: 'STREAMING' | 'CHAT';
+    type: 'STREAMING' | 'CHAT' | 'LIVE';
     status: string;
     createdAt: string;
     sessionCount: number;

@@ -46,11 +46,15 @@ export default function Application() {
         <div className={styles.container}>
             <div className={styles.buttonArea}>
                 <button onClick={onClickAddApplication('STREAMING')}>
-                    <span>Add Live Application</span>
+                    <span>Add Streaming Application</span>
                     <span>+</span>
                 </button>
                 <button onClick={onClickAddApplication('CHAT')}>
                     <span>Add Chat Application</span>
+                    <span>+</span>
+                </button>
+                <button onClick={onClickAddApplication('LIVE')}>
+                    <span>Add Live Application</span>
                     <span>+</span>
                 </button>
             </div>
