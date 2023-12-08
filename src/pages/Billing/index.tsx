@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { isAxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import PaginationComponent from 'components/organisms/Common/Pagination';
 
@@ -20,6 +21,8 @@ interface IBilling {
 }
 
 export default function Billing() {
+    const navigate = useNavigate();
+
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [pageCount, setPageCount] = useState<number>(0);
     const [firstView, setFirstView] = useState<boolean>(true);
@@ -106,7 +109,12 @@ export default function Billing() {
                             <tbody>
                                 {billingList.map((billing) => (
                                     <tr>
-                                        <td>{billing.id}</td>
+                                        <td
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => navigate(`/billing/${billing.id}`)}
+                                        >
+                                            {billing.id}
+                                        </td>
                                         <td>{`${billing.cost} $`}</td>
                                         <td>{dateForm(billing.createdAt)}</td>
                                     </tr>

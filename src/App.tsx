@@ -28,6 +28,7 @@ function App() {
                     <Route path="/participant" element={<router.Participant />} />
 
                     <Route path="/billing" element={<router.Billing />} />
+                    <Route path="/billing/:id" element={<router.SessionBilling />} />
                 </Routes>
             </Layout>
         </Suspense>

@@ -1,0 +1,35 @@
+@import '/src/utils/utils';
+
+.buttonArea {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin: 120px 0 30px 5%;
+
+    input {
+        display: flex;
+        gap: 20px;
+        margin: 0;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        background-color: $navy100;
+        color: white;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 10% 5%;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+    text-align: center;
+
+    table {
+        width: 100%;
+    }
+}
