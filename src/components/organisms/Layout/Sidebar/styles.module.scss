@@ -11,22 +11,20 @@
     z-index: 998;
 }
 
-.menuContainer {
-    padding: 24px 0;
-}
+// .menuContainer {
+//     padding: 24px 0;
+// }
 
 .menu {
     margin: 0;
-    padding: 10px 0;
+    padding: 15px 0px;
     text-align: left;
     list-style: none;
     cursor: pointer;
 
-    &:hover {
-        background-color: gray;
-    }
-
     li {
-        padding: 4px 24px;
+        list-style: none;
+        padding: 10px 0px;
+        cursor: pointer;
     }
 }
