@@ -60,39 +60,47 @@ export default function Question() {
                 <button onClick={() => navigate('/question/post/0')}>Add Question +</button>
             </div>
             <div className={styles.container}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>title</th>
-                            <th>답변등록여부</th>
-                            <th>작성일자</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {errorList.map((error) => (
-                            <tr>
-                                <td style={{ width: '5%' }}>{error.errorId}</td>
-                                <td
-                                    style={{ cursor: 'pointer' }}
-                                    onClick={() => navigate(`/question/${error.errorId}`)}
-                                >
-                                    {error.title}
-                                </td>
-                                <td style={{ width: '10%' }}>
-                                    {error.isAnswered === 'Y' ? '답변완료' : '답변대기중'}
-                                </td>
-                                <td style={{ width: '15%' }}>{dateForm(error.createdAt)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <PaginationComponent
-                    currentPage={currentPage}
-                    setPage={setCurrentPage}
-                    pageCount={pageCount}
-                    setFirstView={setFirstView}
-                />
+                {errorList.length > 0 ? (
+                    <>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>title</th>
+                                    <th>답변등록여부</th>
+                                    <th>작성일자</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {errorList.map((error) => (
+                                    <tr>
+                                        <td style={{ width: '5%' }}>{error.errorId}</td>
+                                        <td
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => navigate(`/question/${error.errorId}`)}
+                                        >
+                                            {error.title}
+                                        </td>
+                                        <td style={{ width: '10%' }}>
+                                            {error.isAnswered === 'Y' ? '답변완료' : '답변대기중'}
+                                        </td>
+                                        <td style={{ width: '15%' }}>
+                                            {dateForm(error.createdAt)}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <PaginationComponent
+                            currentPage={currentPage}
+                            setPage={setCurrentPage}
+                            pageCount={pageCount}
+                            setFirstView={setFirstView}
+                        />
+                    </>
+                ) : (
+                    <div>작성하신 문의사항이 없습니다.</div>
+                )}
             </div>
         </>
     );
