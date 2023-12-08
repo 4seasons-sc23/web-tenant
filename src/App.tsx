@@ -29,6 +29,8 @@ function App() {
 
                     <Route path="/billing" element={<router.Billing />} />
                     <Route path="/billing/:id" element={<router.SessionBilling />} />
+
+                    <Route path="/docs/sdk-docs" element={<router.SdkDocs />} />
                 </Routes>
             </Layout>
         </Suspense>
