@@ -115,7 +115,7 @@ export default function Billing() {
                                         >
                                             {billing.id}
                                         </td>
-                                        <td>{`${billing.cost} $`}</td>
+                                        <td>{`${billing.cost.toFixed(2)} $`}</td>
                                         <td>{dateForm(billing.createdAt)}</td>
                                     </tr>
                                 ))}

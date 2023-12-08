@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 
+import PaginationComponent from 'components/organisms/Common/Pagination';
+
 import request from 'utils/axios';
 import { dateForm } from 'utils/dateForm';
 
@@ -32,6 +34,7 @@ export default function SessionBilling() {
                     `/v1/hosts/${hostid}/applications/${id}/billings?page=${currentPage}&size=15&firstView=${firstView}`
                 );
 
+                if (res.pageCount) setPageCount(res.pageCount);
                 setBillingList(res.data);
             } catch (e) {
                 if (isAxiosError(e)) alert(e.response?.data.message);
@@ -54,12 +57,18 @@ export default function SessionBilling() {
                     {billingList.map((item) => (
                         <tr>
                             <td>{item.id}</td>
-                            <td>{`${item.cost} $`}</td>
+                            <td>{`${item.cost.toFixed(2)} $`}</td>
                             <td>{dateForm(item.createdAt)}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <PaginationComponent
+                currentPage={currentPage}
+                pageCount={pageCount}
+                setPage={setCurrentPage}
+                setFirstView={setFirstView}
+            />
         </div>
     );
 }
