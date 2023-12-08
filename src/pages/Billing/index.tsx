@@ -102,6 +102,7 @@ export default function Billing() {
                             <thead>
                                 <tr>
                                     <th>applicationId</th>
+                                    <th>sessionCount</th>
                                     <th>cost</th>
                                     <th>createdAt</th>
                                 </tr>
@@ -115,6 +116,7 @@ export default function Billing() {
                                         >
                                             {billing.id}
                                         </td>
+                                        <td>{billing.sessionCount}</td>
                                         <td>{`${billing.cost.toFixed(2)} $`}</td>
                                         <td>{dateForm(billing.createdAt)}</td>
                                     </tr>
