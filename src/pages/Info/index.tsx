@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 import request from 'utils/axios';
 
+import styles from './styles.module.scss';
+
 interface IInfo {
     id: string;
     account: string;
@@ -38,11 +40,33 @@ export default function TenantInfo() {
     }, []);
 
     return (
-        <div>
-            <div>{`account: ${infoData.account}`}</div>
-            <div>{`name: ${infoData.name}`}</div>
-            <div>{`phoneNumber: ${infoData.phoneNumber}`}</div>
-            <div>{`status: ${infoData.status}`}</div>
+        <div className={styles.container}>
+            <div className={styles.text}>
+                <strong>account:</strong>
+                <span>{infoData.account}</span>
+            </div>
+            <div className={styles.text}>
+                <strong>name: </strong>
+                <span>{infoData.name}</span>
+            </div>
+            <div className={styles.text}>
+                <div className={styles.text}>
+                    <strong>id: </strong>
+                    <span>{infoData.id}</span>
+                </div>
+                <button
+                    onClick={async () => {
+                        await navigator.clipboard.writeText(infoData.id);
+                        alert('클립보드에 복사되었습니다!');
+                    }}
+                >
+                    복사
+                </button>
+            </div>
+            <div className={styles.text}>
+                <strong>phoneNumber: </strong>
+                <span>{infoData.phoneNumber}</span>
+            </div>
         </div>
     );
 }
