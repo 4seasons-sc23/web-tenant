@@ -93,7 +93,7 @@ export default function Billing() {
                     value={selectedMonth}
                     onChange={(e) => setSelectedMonth(e.target.value)}
                 />
-                <div>{`총 과금량: $${billingSummary}`}</div>
+                <div>{`총 과금량: $${billingSummary.toFixed(2)}`}</div>
             </div>
             <div className={styles.container}>
                 {billingList.length > 0 ? (
