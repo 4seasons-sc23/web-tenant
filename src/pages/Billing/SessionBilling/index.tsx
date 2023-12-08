@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 
 import request from 'utils/axios';
+import { dateForm } from 'utils/dateForm';
 
 import styles from './styles.module.scss';
-import { dateForm } from 'utils/dateForm';
 
 interface IBilling {
     id: string;
