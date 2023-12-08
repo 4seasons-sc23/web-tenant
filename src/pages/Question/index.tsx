@@ -44,7 +44,13 @@ export default function Question() {
         }
     };
 
+    // eslint-disable-next-line consistent-return
     useEffect(() => {
+        if (!window.localStorage.getItem('id')) {
+            alert('로그인 이후 사용 가능합니다.');
+            return navigate('/signin');
+        }
+
         getErrorList(firstView);
     }, [currentPage]);
 
