@@ -72,9 +72,9 @@ export default function Question() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {errorList.map((error) => (
+                                {errorList.map((error, idx) => (
                                     <tr>
-                                        <td style={{ width: '5%' }}>{error.errorId}</td>
+                                        <td style={{ width: '5%' }}>{errorList.length - idx}</td>
                                         <td
                                             style={{ cursor: 'pointer' }}
                                             onClick={() => navigate(`/question/${error.errorId}`)}

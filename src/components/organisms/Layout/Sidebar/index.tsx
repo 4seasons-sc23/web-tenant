@@ -39,7 +39,7 @@ export default function Sidebar() {
                         }}
                     >
                         <div className="menu-title">
-                            <span>Question</span>
+                            <span>Inquiry</span>
                         </div>
                     </li>
                     <li
