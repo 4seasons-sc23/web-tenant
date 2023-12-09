@@ -52,21 +52,16 @@ export default function Sidebar() {
                             <span>Billing</span>
                         </div>
                     </li>
-                    <li className={styles.menu} onClick={handleHowToUseClick}>
+                    <li className={styles.menu}>
                         <div>
-                            <span>How To Use</span>
+                            <a
+                                href="https://4seasons-sc23.github.io/instream-docs/"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                Docs
+                            </a>
                         </div>
-                        {showHowToUse && (
-                            <ul>
-                                <li onClick={() => navigate('/docs/sdk-docs')}>1. SDK DOCS</li>
-                                <li onClick={() => navigate('/docs/api-docs')}>2. API DOCS</li>
-                                <li onClick={() => navigate('/docs/billing')}>3. 요금 정책</li>
-                                <li onClick={() => navigate('/docs/obs-guide')}>
-                                    4. OBS스튜디오 가이드
-                                </li>
-                                <li onClick={() => navigate('/docs/description')}>5. 용어 정의</li>
-                            </ul>
-                        )}
                     </li>
                 </ul>
             </div>
