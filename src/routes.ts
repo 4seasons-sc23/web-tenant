@@ -17,5 +17,3 @@ export const Participant = lazy(() => import('./pages/Participant'));
 
 export const Billing = lazy(() => import('./pages/Billing'));
 export const SessionBilling = lazy(() => import('./pages/Billing/SessionBilling'));
-
-export const SdkDocs = lazy(() => import('./pages/Docs/sdk-docs'));
