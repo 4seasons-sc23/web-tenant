@@ -32,6 +32,18 @@ export default function Billing() {
 
     const [selectedMonth, setSelectedMonth] = useState('');
 
+    const getCurrentMonthDates = () => {
+        const today = new Date();
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString();
+        return { startOfMonth, endOfMonth };
+    };
+
+    const { startOfMonth, endOfMonth } = getCurrentMonthDates();
+
+    const [startAt, setStartAt] = useState<string>(startOfMonth);
+    const [endAt, setEndAt] = useState<string>(endOfMonth);
+
     useEffect(() => {
         const today = new Date();
         const formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
@@ -45,7 +57,7 @@ export default function Billing() {
         try {
             const res = await request(
                 'GET',
-                `/v1/hosts/${hostId}/billings?size=15&page=${currentPage}&firstView=${isFirstView}`
+                `/v1/hosts/${hostId}/billings?size=15&page=${currentPage}&firstView=${isFirstView}&startAt=${startAt}&endAt=${endAt}`
             );
 
             setBillingList(res.data);
@@ -60,29 +72,34 @@ export default function Billing() {
             const year = selectedMonth.split('-')[0];
             const month = selectedMonth.split('-')[1];
 
-            const startAt = new Date(Number(year), Number(month) - 1, 1);
-            const endAt = new Date(Number(year), Number(month), 0);
+            const newStartAt = new Date(Number(year), Number(month) - 1, 1).toISOString();
+            const newEndAt = new Date(Number(year), Number(month), 0).toISOString();
 
-            const getBillingSummary = async () => {
-                try {
-                    const res = await request(
-                        'GET',
-                        `/v1/hosts/${hostId}/billings/summary?status=N&startAt=${startAt.toISOString()}&endAt=${endAt.toISOString()}`
-                    );
-
-                    setBillingSummary(res.cost);
-                } catch (e) {
-                    if (isAxiosError(e)) alert(e.response?.data.message);
-                }
-            };
-
-            getBillingSummary();
+            setStartAt(newStartAt);
+            setEndAt(newEndAt);
         }
     }, [selectedMonth]);
 
     useEffect(() => {
+        const getBillingSummary = async () => {
+            try {
+                const res = await request(
+                    'GET',
+                    `/v1/hosts/${hostId}/billings/summary?status=N&startAt=${startAt}&endAt=${endAt}`
+                );
+
+                setBillingSummary(res.cost);
+            } catch (e) {
+                if (isAxiosError(e)) alert(e.response?.data.message);
+            }
+        };
+
+        getBillingSummary();
+    }, [startAt, endAt]);
+
+    useEffect(() => {
         getBillingList(firstView);
-    }, [currentPage]);
+    }, [currentPage, startAt, endAt]);
 
     return (
         <>
@@ -112,7 +129,11 @@ export default function Billing() {
                                     <tr>
                                         <td
                                             style={{ cursor: 'pointer' }}
-                                            onClick={() => navigate(`/billing/${billing.id}`)}
+                                            onClick={() =>
+                                                navigate(
+                                                    `/billing/${billing.id}?startAt=${startAt}&endAt=${endAt}`
+                                                )
+                                            }
                                         >
                                             {billing.id}
                                         </td>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { isAxiosError } from 'axios';
 
 import PaginationComponent from 'components/organisms/Common/Pagination';
@@ -18,6 +18,7 @@ interface IBilling {
 
 export default function SessionBilling() {
     const { id } = useParams();
+    const location = useLocation();
     const hostid = localStorage.getItem('id');
 
     const [currentPage, setCurrentPage] = useState<number>(0);
@@ -26,12 +27,16 @@ export default function SessionBilling() {
 
     const [billingList, setBillingList] = useState<IBilling[]>([]);
 
+    const params = new URLSearchParams(location.search);
+    const startAt = params.get('startAt');
+    const endAt = params.get('endAt');
+
     useEffect(() => {
         const getBillingList = async () => {
             try {
                 const res = await request(
                     'GET',
-                    `/v1/hosts/${hostid}/applications/${id}/billings?page=${currentPage}&size=15&firstView=${firstView}`
+                    `/v1/hosts/${hostid}/applications/${id}/billings?page=${currentPage}&size=15&firstView=${firstView}&startAt=${startAt}&endAt=${endAt}`
                 );
 
                 if (res.pageCount) setPageCount(res.pageCount);
@@ -42,7 +47,8 @@ export default function SessionBilling() {
         };
 
         getBillingList();
-    }, []);
+    }, [currentPage]);
+
     return (
         <div className={styles.container}>
             <table>
