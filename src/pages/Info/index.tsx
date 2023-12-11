@@ -51,6 +51,20 @@ export default function TenantInfo() {
         }
     };
 
+    const deleteTenant = async () => {
+        if (window.confirm('정말 탈퇴하시겠습니까 ?')) {
+            try {
+                await request('PATCH', `/v1/hosts/${id}/withdrawal`);
+                alert('탈퇴되었습니다.');
+                window.localStorage.removeItem('id');
+                window.localStorage.removeItem('name');
+                window.location.href = '/';
+            } catch (e) {
+                if (isAxiosError(e)) alert(e.response?.data.message);
+            }
+        }
+    };
+
     useEffect(() => {
         getInfoData();
     }, []);
@@ -97,6 +111,9 @@ export default function TenantInfo() {
             <div className={styles.text}>
                 <strong>phoneNumber: </strong>
                 <span>{infoData.phoneNumber}</span>
+            </div>
+            <div>
+                <button onClick={deleteTenant}>회원 탈퇴</button>
             </div>
         </div>
     );
