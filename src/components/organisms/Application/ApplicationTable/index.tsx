@@ -26,12 +26,15 @@ export default function ApplicationTable({
 
     const onClickDeleteApplication = (applicationId: string, ApiKey: string) => async () => {
         const headers = { ApiKey };
-        try {
-            await request('DELETE', `/v1/applications/${applicationId}`, null, headers);
 
-            getApplicationList(true);
-        } catch (e) {
-            if (isAxiosError(e)) alert(e.response?.data.message);
+        if (window.confirm('정말 삭제하시겠습니까 ?')) {
+            try {
+                await request('DELETE', `/v1/applications/${applicationId}`, null, headers);
+
+                getApplicationList(true);
+            } catch (e) {
+                if (isAxiosError(e)) alert(e.response?.data.message);
+            }
         }
     };
 
