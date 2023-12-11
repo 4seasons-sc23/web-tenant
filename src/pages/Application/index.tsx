@@ -59,7 +59,7 @@ export default function Application() {
                 </button>
             </div>
             <div className={styles.applicationList}>
-                {applications ? (
+                {applications.length > 0 ? (
                     <div className={styles.table}>
                         <ApplicationTable
                             applicationList={applications}
