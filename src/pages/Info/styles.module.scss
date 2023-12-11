@@ -12,4 +12,8 @@
 .text {
     display: flex;
     gap: 10px;
+
+    input {
+        margin: 0;
+    }
 }

@@ -26,16 +26,32 @@ export default function TenantInfo() {
         session: '',
     });
 
-    useEffect(() => {
-        const getInfoData = async () => {
-            try {
-                const res = await request('GET', `/v1/hosts/${id}/info`);
-                setInfoData(res);
-            } catch (e) {
-                if (isAxiosError(e)) alert(e.response?.data.message);
-            }
-        };
+    const [name, setName] = useState<string>('');
+    const [isEditName, setIsEditName] = useState<boolean>(false);
 
+    const getInfoData = async () => {
+        try {
+            const res = await request('GET', `/v1/hosts/${id}/info`);
+            setInfoData(res);
+            setName(res.name);
+        } catch (e) {
+            if (isAxiosError(e)) alert(e.response?.data.message);
+        }
+    };
+
+    const patchName = async () => {
+        try {
+            await request('PATCH', `/v1/hosts/${id}/name`, { name });
+            alert('수정되었습니다!');
+            getInfoData();
+            localStorage.setItem('name', name);
+            window.location.reload();
+        } catch (e) {
+            if (isAxiosError(e)) alert(e.response?.data.message);
+        }
+    };
+
+    useEffect(() => {
         getInfoData();
     }, []);
 
@@ -46,9 +62,24 @@ export default function TenantInfo() {
                 <span>{infoData.account}</span>
             </div>
             <div className={styles.text}>
-                <strong>name: </strong>
-                <span>{infoData.name}</span>
+                <div className={styles.text}>
+                    <strong>name: </strong>
+                    {isEditName ? (
+                        <input value={name} onChange={(e) => setName(e.target.value)} />
+                    ) : (
+                        <span>{name}</span>
+                    )}
+                </div>
+                <button
+                    onClick={() => {
+                        setIsEditName((prev) => !prev);
+                        if (isEditName) patchName();
+                    }}
+                >
+                    {isEditName ? '완료' : '수정'}
+                </button>
             </div>
+
             <div className={styles.text}>
                 <div className={styles.text}>
                     <strong>id: </strong>
